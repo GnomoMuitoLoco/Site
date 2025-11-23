@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor Magnatas - Network | Magia, Tecnologia e Aventura</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="assets/logo.png" alt="Logo Servidor Magnatas" class="nav-logo" onerror="this.style.display='none'">
+                <h1>Servidor <span>Magnatas</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Início</a></li>
+                <li><a href="#servidores" class="nav-link">Servidores</a></li>
+                <li><a href="#votar" class="nav-link">Votar</a></li>
+                <li><a href="equipe.html" class="nav-link">Nossa Equipe</a></li>
+                <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" class="nav-link" target="_blank">Wiki</a></li>
+                <li><a href="https://servidormagnatas.com.br/store" class="nav-link" target="_blank">Loja</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo-container">
+                    <img src="assets/logo.png" alt="Servidor Magnatas - Network" class="hero-logo" onerror="this.style.display='none'; document.querySelector('.hero-title').style.display='block';">
+                    <h2 class="hero-title" style="display: none;">Servidor Magnatas - Network</h2>
+                </div>
+                <p class="hero-subtitle">Magia, Tecnologia e Aventura</p>
+                <p class="hero-cta-text">Convide seus amigos para jogar!</p>
+                <div class="hero-buttons">
+                    <a href="https://discord.gg/VewgTM2rNu" class="btn btn-primary" target="_blank">Baixar Modpack</a>
+                    <a href="#servidores" class="btn btn-secondary">Ver Servidores</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Por Que Escolher o Servidor Magnatas?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Magia</h3>
+                    <p>Explore um mundo repleto de feitiços, encantamentos e mistérios arcanos</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Tecnologia</h3>
+                    <p>Construa máquinas avançadas, automatize processos e domine a tecnologia</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Aventura</h3>
+                    <p>Embarque em missões épicas e descubra dimensões inexploradas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servers Section -->
+    <section id="servidores" class="servers-showcase">
+        <div class="container">
+            <h2 class="section-title">Nossos Servidores</h2>
+            
+            <!-- Magnatas Original -->
+            <div class="showcase-server magnatas-original">
+                <div class="showcase-content">
+                    <div class="showcase-header">
+                        <span class="server-indicator loading" id="indicator-mgt">●</span>
+                        <h3>Servidor Magnatas</h3>
+                        <span class="server-badge original">Original</span>
+                    </div>
+                    <p class="showcase-description">O Servidor Magnatas é um modpack original feito por nós, o servidor tem uma pegada um pouco mais difícil, com receitas e progressão personalizada para tornar sua aventura desafiadora. O objetivo é se tornar imortal.</p>
+                    <div class="showcase-info">
+                        <div class="info-item">
+                            <span class="info-label">IP:</span>
+                            <span class="info-value">mgt.servidormagnatas.com.br</span>
+                            <button class="btn-copy-small" onclick="copyIP('mgt.servidormagnatas.com.br')">Copiar</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status:</span>
+                            <span class="info-value" id="status-text-mgt">Verificando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ATM10 -->
+            <div class="showcase-server atm10">
+                <div class="showcase-content">
+                    <div class="showcase-header">
+                        <span class="server-indicator loading" id="indicator-atm10">●</span>
+                        <h3>ATM10 - All The Mods 10</h3>
+                        <span class="server-badge popular">Popular</span>
+                    </div>
+                    <p class="showcase-description">All The Mods 10 é um servidor criado pelo ATM Team com foco em diversos mods e progressão baseada em quests. É um modpack fácil de progredir com vasta liberdade para explorar mods de todos os tipos.</p>
+                    <div class="showcase-info">
+                        <div class="info-item">
+                            <span class="info-label">IP:</span>
+                            <span class="info-value">atm10.servidormagnatas.com.br</span>
+                            <button class="btn-copy-small" onclick="copyIP('atm10.servidormagnatas.com.br')">Copiar</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status:</span>
+                            <span class="info-value" id="status-text-atm10">Verificando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ATM10 TTS -->
+            <div class="showcase-server atm10tts">
+                <div class="showcase-content">
+                    <div class="showcase-header">
+                        <span class="server-indicator loading" id="indicator-atm10tts">●</span>
+                        <h3>ATM10 TTS - All The Mods 10 To The Sky</h3>
+                        <span class="server-badge skyblock">SkyBlock</span>
+                    </div>
+                    <p class="showcase-description">All The Mods 10 To The Sky é uma versão praticamente igual ao ATM10, entretanto, ele foi reformulado para funcionar em sistema de SkyBlock, proporcionando uma gameplay totalmente diferente de um survival comum.</p>
+                    <div class="showcase-info">
+                        <div class="info-item">
+                            <span class="info-label">IP:</span>
+                            <span class="info-value">atm10tts.servidormagnatas.com.br</span>
+                            <button class="btn-copy-small" onclick="copyIP('atm10tts.servidormagnatas.com.br')">Copiar</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status:</span>
+                            <span class="info-value" id="status-text-atm10tts">Verificando...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Server Status Section -->
+    <section class="server-status-section">
+        <div class="container">
+            <h2 class="section-title">Status dos Servidores</h2>
+            <div class="servers-grid">
+                <div class="server-status-card" id="status-atm10">
+                    <div class="server-status-header">
+                        <span class="server-indicator loading">●</span>
+                        <h3>ATM10</h3>
+                    </div>
+                    <p class="server-status-info">Carregando...</p>
+                </div>
+                <div class="server-status-card" id="status-atm10tts">
+                    <div class="server-status-header">
+                        <span class="server-indicator loading">●</span>
+                        <h3>ATM10 TTS</h3>
+                    </div>
+                    <p class="server-status-info">Carregando...</p>
+                </div>
+                <div class="server-status-card" id="status-mgt">
+                    <div class="server-status-header">
+                        <span class="server-indicator loading">●</span>
+                        <h3>Magnatas Original</h3>
+                    </div>
+                    <p class="server-status-info">Carregando...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voting Section -->
+    <section id="votar" class="voting-section">
+        <div class="container">
+            <h2 class="section-title">Vote no Servidor</h2>
+            
+            <div class="voting-content">
+                <h3>Por que votar?</h3>
+                <p>Ao votar no servidor, você nos ajuda a crescer e a alcançar mais jogadores. Quanto mais votos, maior a visibilidade do servidor nas listas!</p>
+                
+                <h3>Recompensas por Voto</h3>
+                <p>💰 200 MGT Coins por voto • ⭐ Reconhecimento público no servidor • 🎁 Ajude o servidor a crescer</p>
+            </div>
+            
+            <div class="voting-sites">
+                <h3>Sites de Votação</h3>
+                <div class="vote-buttons">
+                    <a href="https://minecraftservers.org/vote/680505" class="vote-btn" target="_blank">
+                        <span class="vote-btn-icon">🗳️</span>
+                        <span class="vote-btn-text">Site de Voto #1</span>
+                    </a>
+                    <a href="https://topg.org/minecraft-servers/server-677160#vote" class="vote-btn" target="_blank">
+                        <span class="vote-btn-icon">🗳️</span>
+                        <span class="vote-btn-text">Site de Voto #2</span>
+                    </a>
+                    <a href="https://www.planetminecraft.com/server/servidor-magnatas/vote/" class="vote-btn" target="_blank">
+                        <span class="vote-btn-icon">🗳️</span>
+                        <span class="vote-btn-text">Site de Voto #3</span>
+                    </a>
+                    <a href="https://moddedminecraftservers.com/server/servidor-magnatas.60780/" class="vote-btn" target="_blank">
+                        <span class="vote-btn-icon">🗳️</span>
+                        <span class="vote-btn-text">Site de Voto #4</span>
+                    </a>
+                    <a href="https://minecraft-mp.com/server/329158/vote/" class="vote-btn" target="_blank">
+                        <span class="vote-btn-icon">🗳️</span>
+                        <span class="vote-btn-text">Site de Voto #5</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="stat-number">20-30</h3>
+                    <p class="stat-label">Média de Jogadores Simultâneos</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">24/7</h3>
+                    <p class="stat-label">Uptime</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">5000+</h3>
+                    <p class="stat-label">Membros no Discord</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="stat-number">100%</h3>
+                    <p class="stat-label">Compromisso e Qualidade</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Pronto Para Começar a Aventura?</h2>
+            <p class="cta-subtitle">Entre no nosso Discord para baixar o modpack e começar a jogar!</p>
+            <a href="https://discord.gg/VewgTM2rNu" class="btn btn-primary btn-large" target="_blank">Entrar no Discord</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Servidor <span>Magnatas</span></h3>
+                    <p>Magia, Tecnologia e Aventura</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="#servidores">Servidores</a></li>
+                        <li><a href="#votar">Votar</a></li>
+                        <li><a href="equipe.html">Nossa Equipe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Externos</h4>
+                    <ul>
+                        <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank">Wiki</a></li>
+                        <li><a href="https://servidormagnatas.com.br/store" target="_blank">Loja</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <ul>
+                        <li><a href="https://discord.gg/VewgTM2rNu" target="_blank">Discord</a></li>
+                        <li><a href="https://www.tiktok.com/@servidormagnatas" target="_blank">TikTok</a></li>
+                        <li><a href="https://www.youtube.com/@GnomoMuitoLoco" target="_blank">YouTube</a></li>
+                        <li><a href="https://www.facebook.com/servidormagnatas/" target="_blank">Facebook</a></li>
+                        <li><a href="https://twitter.com/ServidrMagnatas" target="_blank">Twitter</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

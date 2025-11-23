@@ -1,0 +1,11 @@
+LOGO DO SERVIDOR MAGNATAS
+========================
+
+Coloque a logo do servidor aqui com o nome: logo.png
+
+Dimensões recomendadas: 
+- Largura: 50-60px
+- Altura: 50-60px
+- Formato: PNG com fundo transparente
+
+A logo será exibida no canto esquerdo da navbar, ao lado do nome "Servidor Magnatas"

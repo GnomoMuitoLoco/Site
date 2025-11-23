@@ -1,0 +1,21 @@
+PLACEHOLDER - Hero Background Image
+
+Coloque aqui uma imagem com o nome: hero-background.png
+
+Especificações:
+- Resolução: 1920x1080px ou maior
+- Formato: PNG ou JPG
+- Tamanho: Sem restrição
+- Tema: Minecraft/Servidor (magia, tecnologia, aventura)
+
+Efeito aplicado:
+✓ Parallax scroll (movimento suave ao rolar)
+✓ Opacidade 30%
+✓ Sobreposição escura para legibilidade do texto
+✓ Visível apenas na seção hero (topo)
+
+Exemplos de imagens:
+- Castelo mágico com tecnologia
+- Portal dimensional com mods
+- Paisagem de Minecraft épica
+- Base avançada com magia e tecnologia

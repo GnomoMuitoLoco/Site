@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Servidor Magnatas | Painel Administrativo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-box">
+            <!-- Logo/Título -->
+            <div class="login-header">
+                <h1>Servidor <span>Magnatas</span></h1>
+                <p>Painel Administrativo</p>
+            </div>
+
+            <!-- Formulário de Login -->
+            <form method="POST" action="process_login.php" class="login-form" id="loginForm">
+                <input type="hidden" name="csrf_token" value="">
+
+                <!-- Campo de Usuário -->
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        required 
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                        autofocus
+                    >
+                    <span class="error-message" id="username-error"></span>
+                </div>
+
+                <!-- Campo de Senha -->
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required 
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                    >
+                    <span class="error-message" id="password-error"></span>
+                </div>
+
+                <!-- Lembrar Usuário -->
+                <div class="form-checkbox">
+                    <input type="checkbox" id="remember" name="remember" value="1">
+                    <label for="remember">Manter-me conectado</label>
+                </div>
+
+                <!-- Mensagens de Erro/Sucesso -->
+                <div class="form-message" id="login-message"></div>
+
+                <!-- Botão de Login -->
+                <button type="submit" class="btn btn-login">Entrar</button>
+            </form>
+
+            <!-- Links Adicionais -->
+            <div class="login-footer">
+                <p class="help-text">
+                    Problemas para acessar? Contacte o administrador do servidor.
+                </p>
+                <div class="footer-links">
+                    <a href="../index.html">Voltar ao Site</a>
+                </div>
+            </div>
+
+            <!-- Informações de Acesso (Desenvolvimento) -->
+            <div class="dev-info">
+                <p><strong>Credenciais padrão (Desenvolvimento):</strong></p>
+                <p>Usuário: <code>admin</code></p>
+                <p>Senha: <code>admin123</code></p>
+                <p style="color: #ff6b6b; margin-top: 10px;">⚠️ Altere a senha imediatamente após o primeiro acesso!</p>
+            </div>
+        </div>
+
+        <!-- Background Effect -->
+        <div class="login-background">
+            <div class="bg-decoration bg-1"></div>
+            <div class="bg-decoration bg-2"></div>
+            <div class="bg-decoration bg-3"></div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

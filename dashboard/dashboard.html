@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Servidor Magnatas | Painel Administrativo</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    <!-- Navbar do Dashboard -->
+    <nav class="dashboard-navbar">
+        <div class="dashboard-container">
+            <div class="dashboard-brand">
+                <h1>Servidor <span>Magnatas</span></h1>
+                <span class="dashboard-badge">Admin Panel</span>
+            </div>
+            <ul class="dashboard-nav-menu">
+                <li><a href="dashboard.html" class="dashboard-nav-link active">Dashboard</a></li>
+                <li><a href="usuarios.html" class="dashboard-nav-link">Usuários</a></li>
+                <li><a href="configuracoes.html" class="dashboard-nav-link">Configurações</a></li>
+                <li><a href="logs.html" class="dashboard-nav-link">Logs</a></li>
+                <li class="dashboard-nav-user">
+                    <span class="user-info">Olá, <strong id="current-user">Admin</strong></span>
+                    <a href="logout.php" class="dashboard-nav-link logout">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <!-- Header do Dashboard -->
+            <div class="dashboard-header">
+                <div class="header-content">
+                    <h2>Bem-vindo ao Dashboard</h2>
+                    <p>Gerencie seu servidor Magnatas aqui</p>
+                </div>
+                <div class="header-stats">
+                    <span class="stat-badge">Última atualização: <span id="last-update">agora</span></span>
+                </div>
+            </div>
+
+            <!-- Grid de Estatísticas -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3>Usuários Ativos</h3>
+                        <p class="stat-number" id="active-users">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3>Total de Acessos</h3>
+                        <p class="stat-number" id="total-logins">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🔒</div>
+                    <div class="stat-content">
+                        <h3>Sessões Ativas</h3>
+                        <p class="stat-number" id="active-sessions">1</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚙️</div>
+                    <div class="stat-content">
+                        <h3>Sistema</h3>
+                        <p class="stat-status" id="system-status">Online</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Ações Rápidas -->
+            <div class="dashboard-actions">
+                <h3>Ações Rápidas</h3>
+                <div class="actions-grid">
+                    <a href="usuarios.html" class="action-card">
+                        <span class="action-icon">➕</span>
+                        <h4>Novo Usuário</h4>
+                        <p>Criar nova conta administrativo</p>
+                    </a>
+
+                    <a href="configuracoes.html" class="action-card">
+                        <span class="action-icon">⚙️</span>
+                        <h4>Configurações</h4>
+                        <p>Ajustar parâmetros do sistema</p>
+                    </a>
+
+                    <a href="logs.html" class="action-card">
+                        <span class="action-icon">📋</span>
+                        <h4>Ver Logs</h4>
+                        <p>Verificar histórico de atividades</p>
+                    </a>
+
+                    <a href="../index.html" class="action-card" target="_blank">
+                        <span class="action-icon">🌐</span>
+                        <h4>Site Principal</h4>
+                        <p>Visitar página do servidor</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Informações do Sistema -->
+            <div class="dashboard-info">
+                <h3>Informações do Sistema</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Versão PHP:</span>
+                        <span class="info-value" id="php-version">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Banco de Dados:</span>
+                        <span class="info-value" id="db-status">Conectado</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Horário do Servidor:</span>
+                        <span class="info-value" id="server-time">--:--:--</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Endereço IP:</span>
+                        <span class="info-value" id="server-ip">localhost</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="dashboard-container">
+            <p>&copy; 2025 Servidor Magnatas Dashboard. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

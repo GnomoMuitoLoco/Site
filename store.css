@@ -1,0 +1,1213 @@
+/* =======================================
+   LOJA - ESTILOS ESPECÍFICOS
+   ======================================= */
+
+:root {
+    --color-black: #0a0a0a;
+    --color-gray-dark: #1a1a1a;
+    --color-gray: #2a2a2a;
+    --color-yellow: #ffd700;
+    --color-white: #ffffff;
+    --color-green: #4ade80;
+    --color-red: #ef4444;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =======================================
+   HERO SECTION LOJA
+   ======================================= */
+
+.store-hero {
+    background: url('assets/Banner.png') center/cover no-repeat;
+    padding: 150px 0 80px;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.1);
+    margin-top: 0;
+    position: relative;
+}
+
+.store-hero-content {
+    text-align: center;
+    animation: fadeInDown 0.8s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.store-hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8),
+                 0 0 20px rgba(0, 0, 0, 0.6),
+                 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.store-hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-white);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.store-hero-description {
+    font-size: 0.95rem;
+    color: var(--color-white);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 600;
+}
+
+/* =======================================
+   IDENTIFICAÇÃO DO JOGADOR
+   ======================================= */
+
+.player-identification {
+    padding: 4rem 0;
+    background: var(--color-black);
+}
+
+.identification-box {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.identification-box h3 {
+    font-size: 1.75rem;
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+}
+
+.identification-info {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.identification-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.player-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.875rem 1rem;
+    background: rgba(10, 10, 10, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    color: var(--color-white);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.player-input:focus {
+    outline: none;
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(10, 10, 10, 0.8);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.player-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.player-status {
+    background: rgba(74, 222, 128, 0.1);
+    border: 2px solid rgba(74, 222, 128, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.player-status.hidden {
+    display: none;
+}
+
+.status-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.status-icon {
+    font-size: 1.5rem;
+    color: var(--color-green);
+}
+
+.status-text {
+    color: var(--color-white);
+    flex: 1;
+}
+
+.status-text strong {
+    color: var(--color-yellow);
+}
+
+.btn-change {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--color-yellow);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn-change:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.identification-warnings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.warning-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(239, 68, 68, 0.05);
+    border-left: 3px solid rgba(239, 68, 68, 0.3);
+    border-radius: 6px;
+}
+
+.warning-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.warning-text strong {
+    color: var(--color-white);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.warning-text p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* =======================================
+   INFORMAÇÕES DE DOAÇÃO
+   ======================================= */
+
+.donation-info {
+    padding: 2.5rem 0;
+    background: var(--color-black);
+}
+
+.info-box {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.info-header h3 {
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin: 0;
+}
+
+.info-content {
+    margin-top: 1.5rem;
+}
+
+.info-content p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.info-content p strong {
+    color: var(--color-yellow);
+}
+
+.donation-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 8px;
+}
+
+.benefit-icon {
+    font-size: 1.5rem;
+}
+
+.benefit-text {
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+/* =======================================
+   STATS DA LOJA
+   ======================================= */
+
+.store-stats {
+    padding: 2.5rem 0;
+    background: var(--color-black);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.stat-card h4 {
+    font-size: 0.95rem;
+    color: var(--color-white);
+    margin-bottom: 0.75rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-yellow);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+/* =======================================
+   META DA COMUNIDADE
+   ======================================= */
+
+.community-goal {
+    padding: 2.5rem 0;
+    background: var(--color-black);
+}
+
+.goal-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.goal-info {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.goal-info h3 {
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin: 0;
+}
+
+.goal-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.goal-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.goal-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.goal-stat:last-child {
+    border-bottom: none;
+}
+
+.goal-stat .label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.goal-stat .value {
+    color: var(--color-yellow);
+    font-weight: 600;
+}
+
+.goal-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.progress-container {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 40px;
+    background: rgba(10, 10, 10, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-yellow) 0%, #ffed4e 100%);
+    border-radius: 20px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.progress-percentage {
+    text-align: center;
+    color: var(--color-yellow);
+    font-weight: 600;
+    margin: 0;
+}
+
+.goal-motivation {
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* =======================================
+   CATEGORIAS E PRODUTOS
+   ======================================= */
+
+.store-categories {
+    padding: 2.5rem 0;
+    background: var(--color-black);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.category-card {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.category-card:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.category-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.category-header h3 {
+    color: var(--color-white);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.server-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.server-badge.original {
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--color-yellow);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.server-badge.popular {
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--color-green);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.server-badge.skyblock {
+    background: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.category-image {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.image-placeholder {
+    font-size: 3rem;
+}
+
+.category-description {
+    flex: 1;
+    padding: 1.2rem;
+}
+
+.category-description p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.category-stats-mini {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.category-stats-mini {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* =======================================
+   PRODUTOS
+   ======================================= */
+
+.products-container {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.products-header h3 {
+    color: var(--color-white);
+    margin: 0;
+}
+
+.btn-back {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--color-yellow);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-item {
+    background: rgba(10, 10, 10, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.product-item:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: var(--shadow-sm);
+}
+
+.product-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.product-name {
+    color: var(--color-white);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.product-price {
+    color: var(--color-yellow);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.product-item button {
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--color-yellow);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.product-item button:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+/* =======================================
+   DOADORES RECENTES
+   ======================================= */
+
+.recent-donors {
+    padding: 2.5rem 0;
+    background: var(--color-black);
+}
+
+.donors-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+.top-donor-section {
+    display: flex;
+    justify-content: center;
+}
+
+.top-donor-month {
+    background: linear-gradient(135deg, var(--color-yellow) 0%, #ffed4e 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-donor-month h3 {
+    color: var(--color-black);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.top-donor-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    flex: 1;
+}
+
+.top-donor-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-gray);
+}
+
+.avatar-img-full {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top-donor-info h4 {
+    color: var(--color-black);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.top-donor-message {
+    color: var(--color-gray);
+    font-style: italic;
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+/* Tabela de Doadores */
+.donors-table-section {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.donors-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.donors-table thead {
+    background: rgba(255, 215, 0, 0.1);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+}
+
+.donors-table th {
+    padding: 0.75rem;
+    text-align: left;
+    color: var(--color-yellow);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.donors-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.donors-table tbody tr {
+    transition: var(--transition);
+}
+
+.donors-table tbody tr:hover {
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.donors-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Célula de jogador com avatar */
+.donor-rank {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+.donor-avatar-mini {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background: var(--color-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.donor-name {
+    color: var(--color-white);
+    font-weight: 500;
+}
+
+.donor-date {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+/* =======================================
+   MODAL DE COMPRA
+   ======================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideInUp 0.4s ease-out;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: var(--color-white);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--color-yellow);
+    font-size: 1.75rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--color-white);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-section {
+    margin-bottom: 2rem;
+}
+
+.modal-section:last-child {
+    margin-bottom: 0;
+}
+
+.modal-section label {
+    display: block;
+    color: var(--color-white);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.modal-section label small {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(10, 10, 10, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    color: var(--color-white);
+    font-size: 1rem;
+    transition: var(--transition);
+    box-sizing: border-box;
+}
+
+.modal-input:focus {
+    outline: none;
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(10, 10, 10, 0.8);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.modal-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.modal-input option {
+    background: var(--color-gray);
+    color: var(--color-white);
+}
+
+/* Opções de Quantidade */
+.quantity-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.qty-btn {
+    padding: 1rem;
+    background: rgba(10, 10, 10, 0.5);
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.qty-btn:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.qty-btn.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    color: var(--color-yellow);
+}
+
+.qty-btn span:first-child {
+    font-size: 1.25rem;
+}
+
+.qty-label {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.quantity-display {
+    padding: 1rem;
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 6px;
+    color: var(--color-yellow);
+    text-align: center;
+    font-weight: 500;
+}
+
+.modal-warnings {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.warning-small {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    padding: 0.75rem;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 6px;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    border-top: 2px solid rgba(255, 215, 0, 0.1);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-secondary {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, var(--color-yellow) 0%, #ffed4e 100%);
+    border: none;
+    color: var(--color-black);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =======================================
+   ANIMAÇÕES DO MODAL
+   ======================================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* =======================================
+   CTA LOJA
+   ======================================= */
+
+.store-cta {
+    padding: 2.5rem 0;
+    background: linear-gradient(135deg, var(--color-yellow) 0%, #ffed4e 100%);
+    text-align: center;
+}
+
+.store-cta h2 {
+    color: var(--color-black);
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.store-cta p {
+    color: rgba(10, 10, 10, 0.8);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =======================================
+   RESPONSIVO
+   ======================================= */
+
+@media (max-width: 992px) {
+    .store-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .goal-container {
+        grid-template-columns: 1fr;
+    }
+
+    .donors-content {
+        grid-template-columns: 1fr;
+    }
+
+    .top-donor-card {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .store-hero {
+        padding: 4rem 0;
+        margin-top: 70px;
+    }
+
+    .store-hero-title {
+        font-size: 2rem;
+    }
+
+    .store-hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .identification-form {
+        flex-direction: column;
+    }
+
+    .player-input {
+        min-width: 100%;
+    }
+
+    .identification-warnings {
+        grid-template-columns: 1fr;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .store-cta h2 {
+        font-size: 1.75rem;
+    }
+
+    .quantity-options {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-width: 95%;
+    }
+
+    .donors-content {
+        grid-template-columns: 1fr;
+    }
+
+    .donors-table {
+        font-size: 0.9rem;
+    }
+
+    .donors-table th,
+    .donors-table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .store-hero {
+        padding: 2rem 0;
+    }
+
+    .store-hero-title {
+        font-size: 1.5rem;
+    }
+
+    .identification-box {
+        padding: 1.5rem;
+    }
+
+    .products-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+}
+
+/* =======================================
+   ANIMAÇÕES
+   ======================================= */
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-title {
+    color: var(--color-white);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}

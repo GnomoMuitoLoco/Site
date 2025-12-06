@@ -4,7 +4,11 @@
  * Use: php -S localhost:8000 router.php
  */
 
-$requested_file = __DIR__ . $_SERVER['REQUEST_URI'];
+// Separar URI de query string
+$uri_parts = parse_url($_SERVER['REQUEST_URI']);
+$path = $uri_parts['path'];
+
+$requested_file = __DIR__ . $path;
 $requested_file = str_replace('\\', '/', $requested_file); // Normaliza para Windows
 
 // Se for um arquivo físico existente (CSS, JS, imagens, etc)
@@ -27,9 +31,8 @@ if (is_dir($requested_file)) {
 }
 
 // Se for requisição para arquivo .php existente
-$uri = $_SERVER['REQUEST_URI'];
-if (strpos($uri, '.php') !== false) {
-    $file_path = __DIR__ . $uri;
+if (strpos($path, '.php') !== false) {
+    $file_path = __DIR__ . $path;
     if (file_exists($file_path)) {
         $_SERVER['SCRIPT_FILENAME'] = $file_path;
         include $file_path;
@@ -38,8 +41,8 @@ if (strpos($uri, '.php') !== false) {
 }
 
 // Se não tiver extensão, tenta adicionar .php
-if (strpos($uri, '.') === false || (strpos($uri, '.') > strrpos($uri, '/'))) {
-    $file_path = __DIR__ . $uri;
+if (strpos($path, '.') === false || (strpos($path, '.') > strrpos($path, '/'))) {
+    $file_path = __DIR__ . $path;
     if (!pathinfo($file_path, PATHINFO_EXTENSION) && file_exists($file_path . '.php')) {
         $_SERVER['SCRIPT_FILENAME'] = $file_path . '.php';
         include $file_path . '.php';

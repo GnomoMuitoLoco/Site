@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Servidor Magnatas | Doações para a Comunidade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="store.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="assets/logo.png" alt="Logo Servidor Magnatas" class="nav-logo" onerror="this.style.display='none'">
+                <h1>Servidor <span>Magnatas</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Início</a></li>
+                <li><a href="index.html#servidores" class="nav-link">Servidores</a></li>
+                <li><a href="index.html#votar" class="nav-link">Votar</a></li>
+                <li><a href="equipe.html" class="nav-link">Nossa Equipe</a></li>
+                <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" class="nav-link" target="_blank">Wiki</a></li>
+                <li><a href="store.html" class="nav-link active">Loja</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Loja -->
+    <section class="store-hero">
+        <div class="container">
+            <div class="store-hero-content">
+                <h2 class="store-hero-title">Loja Magnatas</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- O que é Doação na Loja -->
+    <section class="donation-info">
+        <div class="container">
+            <div class="info-box">
+                <div class="info-header">
+                    <h3>💝 O que é uma Doação?</h3>
+                </div>
+                <div class="info-content">
+                    <p>
+                        <strong>Sua compra na loja é uma doação para a comunidade!</strong> Cada MGT-Cash que você adquire vai direto para 
+                        investimentos em infraestrutura, melhorias no servidor, novas features e manutenção de qualidade. 
+                    </p>
+                    <p>
+                        <strong>Não é apenas pelas recompensas ou itens</strong> É você ajudando a manter um servidor de qualidade, com uptime 24/7, 
+                        com qualidade, conteúdo original e sempre crescendo, com atualizações constantes para você e seus amigos.
+                    </p>
+                    <div class="donation-benefits">
+                        <div class="benefit">
+                            <span class="benefit-icon">🖥️</span>
+                            <span class="benefit-text">Melhor infraestrutura</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-icon">⚡</span>
+                            <span class="benefit-text">Melhor performance</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-icon">🎮</span>
+                            <span class="benefit-text">Novas features e atualizações constantes</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-icon">🔒</span>
+                            <span class="benefit-text">Servidor sempre online para você e seus amigos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats da Loja -->
+    <section class="store-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>👥 Total de Doadores</h4>
+                    <p class="stat-value" id="totalDonors">0</p>
+                    <span class="stat-label">Apoiando o servidor</span>
+                </div>
+                <div class="stat-card">
+                    <h4>⏰ Tempo Online</h4>
+                    <p class="stat-value">99.9%</p>
+                    <span class="stat-label">Uptime de servidores</span>
+                </div>
+                <div class="stat-card">
+                    <h4>🎁 Items Entregues</h4>
+                    <p class="stat-value" id="itemsDelivered">0</p>
+                    <span class="stat-label">Este mês</span>
+                </div>
+                <div class="stat-card">
+                    <h4>💚 Obrigado!</h4>
+                    <p class="stat-value">∞</p>
+                    <span class="stat-label">Por apoiar nosso servidor</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meta da Comunidade -->
+    <section class="community-goal">
+        <div class="container">
+            <h2 class="section-title">🎯 Meta da Comunidade</h2>
+            <div class="goal-container">
+                <div class="goal-progress" style="width: 100%;">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="goalProgressBar" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-percentage" id="goalProgressText">0% atingido</p>
+                    </div>
+                    <p class="goal-motivation">
+                        Cada contribuição nos aproxima de melhorias ainda maiores! Obrigado por fazer parte desta jornada. 💙
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorias e Produtos -->
+    <section class="store-categories">
+        <div class="container">
+            <h2 class="section-title">🛍️ Escolha seu Servidor</h2>
+            <p class="section-subtitle">Selecione o servidor que você deseja apoiar</p>
+
+            <div class="categories-grid">
+                <!-- Categoria 1: Servidor Magnatas -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>Servidor Magnatas</h3>
+                        <span class="server-badge original">Original</span>
+                    </div>
+                    <div class="category-image">
+                        <div class="image-placeholder">🏰</div>
+                    </div>
+                    <div class="category-description">
+                        <p>
+                            Nosso servidor original com modpack customizado, receitas personalizadas e progressão desafiadora.
+                        </p>
+                        <div class="category-stats-mini">
+                            <span>💰 MGT-Cash</span>
+                            <span>•</span>
+                            <span>🎁 Itens especiais</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" onclick="redirectToCheckout('mgt')">
+                        Comprar MGT-Cash
+                    </button>
+                </div>
+
+                <!-- Categoria 2: ATM10 -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>ATM10</h3>
+                        <span class="server-badge popular">Popular</span>
+                    </div>
+                    <div class="category-image">
+                        <div class="image-placeholder">⚙️</div>
+                    </div>
+                    <div class="category-description">
+                        <p>
+                            All The Mods 10 com progressão baseada em quests e liberdade completa para explorar mods.
+                        </p>
+                        <div class="category-stats-mini">
+                            <span>💰 MGT-Cash</span>
+                            <span>•</span>
+                            <span>🎁 Kits iniciais</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" onclick="redirectToCheckout('atm10')">
+                        Comprar MGT-Cash
+                    </button>
+                </div>
+
+                <!-- Categoria 3: ATM10 To The Sky -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>ATM10 To The Sky</h3>
+                        <span class="server-badge skyblock">SkyBlock</span>
+                    </div>
+                    <div class="category-image">
+                        <div class="image-placeholder">☁️</div>
+                    </div>
+                    <div class="category-description">
+                        <p>
+                            All The Mods 10 em formato SkyBlock. Comece do zero em uma pequena ilha e construa seu império.
+                        </p>
+                        <div class="category-stats-mini">
+                            <span>💰 MGT-Cash</span>
+                            <span>•</span>
+                            <span>🎁 Ilhas premium</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" onclick="redirectToCheckout('atm10tts')">
+                        Comprar MGT-Cash
+                    </button>
+                </div>
+            </div>
+
+            <!-- Espaço para produtos (será preenchido dinamicamente) -->
+            <div id="productsContainer" class="products-container" style="display: none;">
+                <div class="products-header">
+                    <h3 id="categoryTitle">Produtos</h3>
+                    <button class="btn-back" onclick="backToCategories()">← Voltar</button>
+                </div>
+                <div id="productsList" class="products-grid">
+                    <!-- Produtos carregados aqui -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doadores Recentes -->
+    <section class="recent-donors">
+        <div class="container">
+            <h2 class="section-title">🌟 Doadores Recentes</h2>
+            <p class="section-subtitle">Agradecemos o apoio de nossa comunidade</p>
+
+            <div class="donors-content">
+                <!-- Top Doador -->
+                <div class="top-donor-section" id="topDonorSection">
+                    <div class="top-donor-month">
+                        <h3>🏆 Top Doador do Mês</h3>
+                        <div class="top-donor-card" id="topDonorCard">
+                            <p style="text-align: center; color: #aaa; padding: 2rem;">Nenhum registro</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela de Doadores -->
+                <div class="donors-table-section">
+                    <table class="donors-table">
+                        <thead>
+                            <tr>
+                                <th>Jogador</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donorsTableBody">
+                            <tr>
+                                <td colspan="2" style="text-align: center; color: #aaa; padding: 2rem;">Nenhum registro</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CTA Section -->
+    <section class="store-cta">
+        <div class="container">
+            <h2>Comece a Apoiar Agora!</h2>
+            <p>Faça parte de nossa comunidade de doadores e ajude a manter a qualidade dos servidores</p>
+            <a href="https://discord.gg/VewgTM2rNu" target="_blank" class="btn btn-primary btn-large">Ir para Discord</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Servidor <span>Magnatas</span></h3>
+                    <p>Magia, Tecnologia e Aventura</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="index.html#servidores">Servidores</a></li>
+                        <li><a href="index.html#votar">Votar</a></li>
+                        <li><a href="equipe.html">Nossa Equipe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Externos</h4>
+                    <ul>
+                        <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank">Wiki</a></li>
+                        <li><a href="store.html">Loja</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <ul>
+                        <li><a href="https://discord.gg/VewgTM2rNu" target="_blank">Discord</a></li>
+                        <li><a href="https://www.tiktok.com/@servidormagnatas" target="_blank">TikTok</a></li>
+                        <li><a href="https://www.youtube.com/@GnomoMuitoLoco" target="_blank">YouTube</a></li>
+                        <li><a href="https://www.facebook.com/servidormagnatas/" target="_blank">Facebook</a></li>
+                        <li><a href="https://twitter.com/ServidrMagnatas" target="_blank">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="store.js"></script>
+</body>
+</html>

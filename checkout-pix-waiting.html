@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aguardando Pagamento PIX - Servidor Magnatas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pix-container {
+            max-width: 500px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .pix-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pix-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pix-header h1 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pix-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .pix-content {
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%);
+            border: 2px solid rgba(0, 191, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .qr-code-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .qr-code-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .qr-label {
+            color: #333;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .pix-key-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pix-key-section h3 {
+            color: #00bfff;
+            margin: 0 0 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .pix-key-display {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 191, 255, 0.2);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            word-break: break-all;
+            color: #00bfff;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background: rgba(0, 191, 255, 0.2);
+            border: 1px solid rgba(0, 191, 255, 0.4);
+            color: #00bfff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(0, 191, 255, 0.3);
+            border-color: rgba(0, 191, 255, 0.6);
+        }
+
+        .copy-btn.copied {
+            background: rgba(0, 255, 100, 0.2);
+            border-color: rgba(0, 255, 100, 0.6);
+            color: #00ff64;
+        }
+
+        .info-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .status-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .status-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-value {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 191, 255, 0.3);
+            border-top-color: #00bfff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-checking {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            min-height: 44px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .timeout-info {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .timeout-warning {
+            color: #ff6b6b;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timer {
+            color: #00bfff;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .pix-container {
+                margin: 2rem 1rem;
+            }
+
+            .status-info {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/Servidor.png" alt="Servidor Magnatas">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="store.html">Loja</a></li>
+                <li><a href="equipe.html">Nossa Equipe</a></li>
+                <li><a href="regras.html">Regras</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pix-container">
+        <div class="pix-header">
+            <div class="pix-icon">💳</div>
+            <h1>Aguardando Pagamento PIX</h1>
+            <p>Complete o pagamento para liberar seu produto</p>
+        </div>
+
+        <div class="pix-content">
+            <div class="info-box">
+                ℹ️ <p>Aponte a câmera do seu celular para o código QR ou copie a chave PIX abaixo</p>
+            </div>
+
+            <!-- QR Code -->
+            <div class="qr-code-box">
+                <img id="qrCode" src="" alt="QR Code PIX" style="display: none;">
+                <div id="qrLoading" style="color: #333;">Gerando QR Code...</div>
+            </div>
+
+            <!-- PIX Key -->
+            <div class="pix-key-section">
+                <h3>📋 Chave PIX (Cópia e Cola)</h3>
+                <div class="pix-key-display" id="pixKeyDisplay">-</div>
+                <button class="copy-btn" id="copyBtn">📋 Copiar Chave PIX</button>
+            </div>
+
+            <!-- Status Info -->
+            <div class="status-info">
+                <div class="status-item">
+                    <div class="status-label">Status</div>
+                    <div class="status-value">
+                        <span id="statusText">Aguardando</span>
+                        <div class="loading-spinner" id="statusSpinner"></div>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">Tempo Restante</div>
+                    <div class="status-value" id="timeoutCounter">30:00</div>
+                </div>
+            </div>
+
+            <div class="status-checking">
+                Verificando pagamento...
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+                <button class="btn btn-primary" id="checkBtn">🔄 Verificar Agora</button>
+                <a href="store.html" class="btn btn-secondary">🛍️ Voltar à Loja</a>
+            </div>
+
+            <!-- Timeout Warning -->
+            <div class="timeout-info">
+                <div class="timeout-warning">⏰ Atenção!</div>
+                <p>O código PIX expira em <span class="timer" id="expirationTime">30 minutos</span>. Após isso, você precisará gerar um novo código.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Servidor Magnatas</h3>
+                    <p>A melhor experiência em Minecraft modded.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="store.html">Loja</a></li>
+                        <li><a href="equipe.html">Equipe</a></li>
+                        <li><a href="regras.html">Regras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Discord: discord.gg/magnatas</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let transactionId = null;
+        let checkInterval = null;
+        let timeoutInterval = null;
+        const POLL_INTERVAL = 5000; // 5 segundos
+        const TIMEOUT_DURATION = 30 * 60 * 1000; // 30 minutos
+        const CHECK_ENDPOINT = '/api/check-pix-status';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            transactionId = params.get('transaction_id');
+            const qrCode = params.get('qr_code');
+            const pixKey = params.get('pix_key');
+
+            if (qrCode) {
+                document.getElementById('qrCode').src = qrCode;
+                document.getElementById('qrCode').style.display = 'block';
+                document.getElementById('qrLoading').style.display = 'none';
+            } else {
+                document.getElementById('qrLoading').textContent = 'QR Code não disponível';
+            }
+
+            if (pixKey) {
+                document.getElementById('pixKeyDisplay').textContent = pixKey;
+            }
+
+            startPaymentCheck();
+            startTimeout();
+
+            // Copy button
+            document.getElementById('copyBtn').addEventListener('click', copyPixKey);
+
+            // Manual check button
+            document.getElementById('checkBtn').addEventListener('click', checkPaymentStatus);
+
+            // Menu responsivo
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        });
+
+        function startPaymentCheck() {
+            // Verificar imediatamente
+            checkPaymentStatus();
+            
+            // Depois, verificar periodicamente
+            checkInterval = setInterval(checkPaymentStatus, POLL_INTERVAL);
+        }
+
+        async function checkPaymentStatus() {
+            if (!transactionId) return;
+
+            try {
+                const response = await fetch(CHECK_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        transaction_id: transactionId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.status === 'approved') {
+                    // Pagamento confirmado!
+                    clearInterval(checkInterval);
+                    clearInterval(timeoutInterval);
+                    
+                    document.getElementById('statusText').textContent = 'Aprovado ✓';
+                    document.getElementById('statusSpinner').style.display = 'none';
+                    
+                    // Redirecionar para página de sucesso após 2 segundos
+                    setTimeout(() => {
+                        window.location.href = `checkout-success.html?order=${data.order_id}&product=${data.product}&player=${data.player}&amount=${data.amount}`;
+                    }, 2000);
+                } else if (data.status === 'pending') {
+                    document.getElementById('statusText').textContent = 'Aguardando...';
+                }
+            } catch (error) {
+                console.error('Erro ao verificar pagamento:', error);
+            }
+        }
+
+        function startTimeout() {
+            let timeRemaining = TIMEOUT_DURATION;
+
+            timeoutInterval = setInterval(() => {
+                timeRemaining -= 1000;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(checkInterval);
+                    clearInterval(timeoutInterval);
+                    
+                    // Redirecionar para página de erro
+                    window.location.href = 'checkout-cancel.html?reason=PIX+expirado&status=Expirado';
+                } else {
+                    // Atualizar timer
+                    const minutes = Math.floor(timeRemaining / 60000);
+                    const seconds = Math.floor((timeRemaining % 60000) / 1000);
+                    
+                    document.getElementById('timeoutCounter').textContent = 
+                        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    
+                    // Mudar cor quando tiver menos de 5 minutos
+                    if (timeRemaining < 5 * 60 * 1000) {
+                        document.getElementById('timeoutCounter').style.color = '#ff6b6b';
+                    }
+                }
+            }, 1000);
+        }
+
+        function copyPixKey() {
+            const pixKey = document.getElementById('pixKeyDisplay').textContent;
+            
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ Copiado!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '📋 Copiar Chave PIX';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                alert('Erro ao copiar a chave PIX');
+            });
+        }
+    </script>
+</body>
+</html>

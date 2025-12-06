@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Cancelado - Servidor Magnatas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-container {
+            max-width: 600px;
+            margin: 6rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .error-box {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .error-box h1 {
+            color: #f00;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-box p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-details {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .detail-value {
+            color: #f00;
+            font-weight: 600;
+        }
+
+        .reason-section {
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 4px solid #ffa500;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .reason-section h3 {
+            color: #ffa500;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .reason-section ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .reason-section li {
+            margin: 0.5rem 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .support-box {
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .support-box strong {
+            color: #00bfff;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/Servidor.png" alt="Servidor Magnatas">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="store.html">Loja</a></li>
+                <li><a href="equipe.html">Nossa Equipe</a></li>
+                <li><a href="regras.html">Regras</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="error-container">
+        <div class="error-icon">❌</div>
+
+        <div class="error-box">
+            <h1>Pagamento Cancelado</h1>
+            <p id="errorTitle">Infelizmente o pagamento não foi processado.</p>
+        </div>
+
+        <div class="error-details">
+            <div class="detail-item">
+                <span class="detail-label">Status:</span>
+                <span class="detail-value" id="errorStatus">Cancelado</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Data/Hora:</span>
+                <span class="detail-value" id="errorDate">-</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Motivo:</span>
+                <span class="detail-value" id="errorReason">Não especificado</span>
+            </div>
+        </div>
+
+        <div class="reason-section">
+            <h3>🤔 O que pode ter acontecido?</h3>
+            <ul>
+                <li>Você pode ter cancelado o pagamento</li>
+                <li>Dados de cartão ou conta inválidos</li>
+                <li>Saldo insuficiente na conta/cartão</li>
+                <li>Seu banco/pagador rejeitou a transação</li>
+                <li>Limite de transações atingido</li>
+                <li>Sessão expirada</li>
+            </ul>
+        </div>
+
+        <div class="actions">
+            <a href="checkout.html" class="btn btn-primary">🔄 Tentar Novamente</a>
+            <a href="store.html" class="btn btn-secondary">🛍️ Voltar à Loja</a>
+        </div>
+
+        <div class="support-box">
+            <strong>💬 Precisa de ajuda?</strong> Entre em contato com nosso suporte no Discord: <strong>discord.gg/magnatas</strong>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Servidor Magnatas</h3>
+                    <p>A melhor experiência em Minecraft modded.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="store.html">Loja</a></li>
+                        <li><a href="equipe.html">Equipe</a></li>
+                        <li><a href="regras.html">Regras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Discord: discord.gg/magnatas</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carregar informações do erro
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            
+            const reason = params.get('reason') || 'Transação cancelada pelo usuário';
+            const status = params.get('status') || 'Cancelado';
+            
+            document.getElementById('errorReason').textContent = reason;
+            document.getElementById('errorStatus').textContent = status;
+            document.getElementById('errorDate').textContent = new Date().toLocaleString('pt-BR');
+        });
+
+        // Menu responsivo
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

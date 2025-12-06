@@ -18,126 +18,15 @@ function initializeStore() {
 }
 
 // =======================================
-// MODAL DE COMPRA
+// REDIRECIONAMENTO PARA CHECKOUT
 // =======================================
 
-let currentPurchaseServer = null;
-
-function openPurchaseModal(server) {
-    currentPurchaseServer = server;
-    
-    const modal = document.getElementById('purchaseModal');
-    modal.classList.add('active');
-    
-    // Atualizar o select com o servidor
-    const serverSelect = document.getElementById('modalServerSelect');
-    const serverNames = {
-        'mgt': 'Servidor Magnatas',
-        'atm10': 'All The Mods 10',
-        'atm10tts': 'ATM10 To The Sky'
-    };
-    
-    serverSelect.innerHTML = `<option value="${server}" selected>${serverNames[server]}</option>`;
-    serverSelect.disabled = false;
-    
-    // Focar no input de nick
-    setTimeout(() => {
-        document.getElementById('modalNickInput').focus();
-    }, 100);
-    
-    // Fechar com ESC
-    document.addEventListener('keydown', closeModalOnEsc);
-}
-
-function closePurchaseModal() {
-    const modal = document.getElementById('purchaseModal');
-    modal.classList.remove('active');
-    
-    // Limpar formulário
-    document.getElementById('modalNickInput').value = '';
-    document.getElementById('modalQuantity').value = '0';
-    document.getElementById('quantityDisplay').textContent = 'Selecione uma quantidade';
-    
-    // Remover classe active dos botões de quantidade
-    document.querySelectorAll('.qty-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    // Remover listener de ESC
-    document.removeEventListener('keydown', closeModalOnEsc);
-}
-
-function closeModalOnEsc(e) {
-    if (e.key === 'Escape') {
-        closePurchaseModal();
-    }
-}
-
-function selectQuantity(amount) {
-    // Atualizar input hidden
-    document.getElementById('modalQuantity').value = amount;
-    
-    // Atualizar display
-    const quantityLabel = {
-        100: '100 MGT-Cash',
-        250: '250 MGT-Cash',
-        700: '700 MGT-Cash',
-        1500: '1.500 MGT-Cash'
-    };
-    
-    document.getElementById('quantityDisplay').textContent = `Selecionado: ${quantityLabel[amount]}`;
-    
-    // Atualizar classe active dos botões
-    document.querySelectorAll('.qty-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.closest('.qty-btn').classList.add('active');
-}
-
-function proceedToCheckout() {
-    const nick = document.getElementById('modalNickInput').value.trim();
-    const quantity = parseInt(document.getElementById('modalQuantity').value);
-    
-    // Validações
-    if (!nick) {
-        showNotification('Por favor, digite seu nick!', 'error');
-        return;
-    }
-    
-    if (!/^[a-zA-Z0-9_]+$/.test(nick)) {
-        showNotification('Nick contém caracteres inválidos!', 'error');
-        return;
-    }
-    
-    if (nick.length < 3 || nick.length > 16) {
-        showNotification('Nick deve ter entre 3 e 16 caracteres!', 'error');
-        return;
-    }
-    
-    if (quantity === 0) {
-        showNotification('Selecione uma quantidade!', 'error');
-        return;
-    }
-    
-    // Preparar dados para checkout
-    const checkoutData = {
-        nick: nick,
-        server: currentPurchaseServer,
-        quantity: quantity,
-        timestamp: new Date().toISOString()
-    };
-    
-    // Salvar na sessão
-    sessionStorage.setItem('checkoutData', JSON.stringify(checkoutData));
-    
-    // Fechar modal
-    closePurchaseModal();
+function redirectToCheckout(server) {
+    // Salvar servidor selecionado na sessão
+    sessionStorage.setItem('selectedServer', server);
     
     // Redirecionar para checkout
-    showNotification(`Redirecionando para checkout de ${quantity} MGT-Cash...`, 'info');
-    setTimeout(() => {
-        window.location.href = '/checkout.html';
-    }, 1500);
+    window.location.href = `checkout.html?server=${server}`;
 }
 
 // =======================================
@@ -145,59 +34,164 @@ function proceedToCheckout() {
 // ======================================= */
 
 function loadRecentDonorsData() {
-    // Dados dos doadores (stub - será integrado com backend)
-    const donors = [
-        { rank: '🥇', name: 'GnomoMuitoLouco', date: 'Há 2 horas' },
-        { rank: '🥈', name: 'PlayerMaster123', date: 'Há 4 horas' },
-        { rank: '🥉', name: 'MineroCobalt', date: 'Há 6 horas' },
-        { rank: '⭐', name: 'Construtor_RX', date: 'Há 8 horas' },
-        { rank: '⭐', name: 'Explorer_Sky', date: 'Há 10 horas' },
-        { rank: '⭐', name: 'PvPDragon99', date: 'Há 12 horas' }
-    ];
+    // Buscar transações aprovadas (últimas 10)
+    fetch('backend/api_loja.php?path=transactions&status_pagamento=aprovado&limit=10')
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.data && data.data.length > 0) {
+            // Ordenar por data decrescente
+            const sorted = data.data.sort((a, b) => 
+                new Date(b.criado_em) - new Date(a.criado_em)
+            );
+            
+            // Top doador é o primeiro da lista (mais recente aprovado)
+            const topDonor = sorted[0];
+            
+            renderDonorsData(sorted, topDonor);
+        } else {
+            renderEmptyDonorsState();
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao carregar doadores:', error);
+        renderEmptyDonorsState();
+    });
+}
 
-    // Top doador
-    const topDonor = donors[0];
+function renderDonorsData(transactions, topDonor) {
+    // Renderizar top doador se existir
+    const topDonorCard = document.getElementById('topDonorCard');
+    if (topDonor) {
+        topDonorCard.innerHTML = `
+            <div class="top-donor-avatar">
+                <img src="https://minotar.net/body/${topDonor.jogador_nick}/100.png" 
+                     alt="Avatar" 
+                     class="avatar-img-full"
+                     onerror="this.src='https://minotar.net/avatar/${topDonor.jogador_nick}/100.png'">
+            </div>
+            <div class="top-donor-info">
+                <h4>${topDonor.jogador_nick}</h4>
+                <p class="top-donor-message">"¡Obrigado pelo apoio extraordinário!"</p>
+            </div>
+        `;
+    } else {
+        topDonorCard.innerHTML = '<p style="text-align: center; color: #aaa; padding: 2rem;">Nenhum registro</p>';
+    }
     
-    // Carregar avatar do top doador
-    const topDonorAvatar = document.getElementById('topDonorAvatar');
-    topDonorAvatar.src = `https://minotar.net/bust/${topDonor.name}/100.png`;
-    topDonorAvatar.onerror = function() {
-        this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzJhMmEyYSIvPjwvc3ZnPg==';
-    };
-    
-    document.getElementById('topDonorName').textContent = topDonor.name;
-    
-    // Preencher tabela de doadores (sem posição)
+    // Preencher tabela de doadores (últimas transações)
     const tableBody = document.getElementById('donorsTableBody');
-    tableBody.innerHTML = donors.map((donor, index) => `
-        <tr>
-            <td>
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div class="donor-avatar-mini">
-                        <img src="https://minotar.net/avatar/${donor.name}/40" alt="${donor.name}" class="avatar-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMmEyYTJhIi8+PC9zdmc+'">
+    tableBody.innerHTML = transactions.slice(0, 10).map(transaction => {
+        const date = new Date(transaction.criado_em);
+        const timeAgo = getTimeAgo(date);
+        
+        return `
+            <tr>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div class="donor-avatar-mini">
+                            <img src="https://minotar.net/avatar/${transaction.jogador_nick}/32" 
+                                 alt="${transaction.jogador_nick}" 
+                                 class="avatar-img" 
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMmEyYTJhIi8+PC9zdmc+'">
+                        </div>
+                        <span class="donor-name">${transaction.jogador_nick}</span>
                     </div>
-                    <span class="donor-name">${donor.name}</span>
-                </div>
-            </td>
-            <td class="donor-date">${donor.date}</td>
-        </tr>
-    `).join('');
+                </td>
+                <td class="donor-date">${timeAgo}</td>
+            </tr>
+        `;
+    }).join('');
+    
+    // Atualizar estatísticas
+    updateStoreStats(transactions.length);
+}
+
+function renderEmptyDonorsState() {
+    // Estado vazio para top doador
+    const topDonorCard = document.getElementById('topDonorCard');
+    topDonorCard.innerHTML = '<p style="text-align: center; color: #aaa; padding: 2rem;">Nenhum registro</p>';
+    
+    // Estado vazio para tabela
+    const tableBody = document.getElementById('donorsTableBody');
+    tableBody.innerHTML = '<tr><td colspan="2" style="text-align: center; color: #aaa; padding: 2rem;">Nenhum registro</td></tr>';
+    
+    // Zerar estatísticas
+    updateStoreStats(0);
+}
+
+function updateStoreStats(totalDonors) {
+    const totalDonorsEl = document.getElementById('totalDonors');
+    const itemsDeliveredEl = document.getElementById('itemsDelivered');
+    
+    if (totalDonorsEl) totalDonorsEl.textContent = totalDonors;
+    if (itemsDeliveredEl) itemsDeliveredEl.textContent = totalDonors; // Por enquanto usar mesmo valor
+}
+
+function getTimeAgo(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    
+    if (diffMins < 60) {
+        return `Há ${diffMins} minuto${diffMins !== 1 ? 's' : ''}`;
+    } else if (diffHours < 24) {
+        return `Há ${diffHours} hora${diffHours !== 1 ? 's' : ''}`;
+    } else {
+        return `Há ${diffDays} dia${diffDays !== 1 ? 's' : ''}`;
+    }
 }
 
 function loadCommunityGoalData() {
-    // Apenas atualizar a porcentagem da barra de progresso
-    const goalData = {
-        percentage: 49
-    };
-
-    // Atualizar barra de progresso
-    const progressFill = document.querySelector('.progress-fill');
-    const progressPercentage = document.querySelector('.progress-percentage');
+    // Buscar meta da comunidade (mês/ano atual)
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
     
-    if (progressFill && progressPercentage) {
-        progressFill.style.width = `${goalData.percentage}%`;
-        progressPercentage.textContent = `${goalData.percentage}% atingido`;
+    fetch(`backend/api_loja.php?path=meta-comunidade&mes=${month}&ano=${year}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.data) {
+            const meta = data.data;
+            const percentage = meta.valor_meta > 0 
+                ? Math.min(100, Math.floor((meta.valor_atual / meta.valor_meta) * 100))
+                : 0;
+            
+            updateGoalProgress(percentage, meta);
+        } else {
+            updateGoalProgress(0, null);
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao carregar meta da comunidade:', error);
+        updateGoalProgress(0, null);
+    });
+}
+
+function updateGoalProgress(percentage, meta = null) {
+    const progressFill = document.getElementById('goalProgressBar');
+    const progressText = document.getElementById('goalProgressText');
+    
+    if (progressFill) progressFill.style.width = `${percentage}%`;
+    if (progressText) {
+        if (meta) {
+            const atual = formatCurrency(meta.valor_atual);
+            const objetivo = formatCurrency(meta.valor_meta);
+            progressText.textContent = `${atual} / ${objetivo} (${percentage}%)`;
+        } else {
+            progressText.textContent = `${percentage}% atingido`;
+        }
     }
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value || 0);
 }
 
 // =======================================
@@ -205,23 +199,7 @@ function loadCommunityGoalData() {
 // =======================================
 
 function setupEventListeners() {
-    // Fechar modal ao clicar fora
-    const modal = document.getElementById('purchaseModal');
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closePurchaseModal();
-        }
-    });
-    
-    // Enter no campo de nick
-    const nickInput = document.getElementById('modalNickInput');
-    if (nickInput) {
-        nickInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                proceedToCheckout();
-            }
-        });
-    }
+    // Event listeners se necessário
 }
 
 function showNotification(message, type = 'info') {
@@ -342,9 +320,6 @@ document.head.appendChild(style);
 // =======================================
 
 window.store = {
-    openPurchaseModal,
-    closePurchaseModal,
-    selectQuantity,
-    proceedToCheckout,
+    redirectToCheckout,
     showNotification
 };

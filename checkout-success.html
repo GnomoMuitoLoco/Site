@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Realizado - Servidor Magnatas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 6rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 0.6s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .success-box {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .success-box h1 {
+            color: #0f0;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-box p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .order-info {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .order-value {
+            color: var(--color-yellow);
+            font-weight: 600;
+        }
+
+        .status-timeline {
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .timeline-icon.done {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #0f0;
+            color: #0f0;
+        }
+
+        .timeline-icon.pending {
+            background: rgba(255, 165, 0, 0.2);
+            border: 2px solid #ffa500;
+            color: #ffa500;
+        }
+
+        .timeline-text {
+            flex: 1;
+        }
+
+        .timeline-text h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .timeline-text p {
+            margin: 0.3rem 0 0 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88 0%, #00ffff 100%);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .info-box {
+            background: rgba(0, 191, 255, 0.1);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .info-box strong {
+            color: #00bfff;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/Servidor.png" alt="Servidor Magnatas">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="store.html">Loja</a></li>
+                <li><a href="equipe.html">Nossa Equipe</a></li>
+                <li><a href="regras.html">Regras</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="success-container">
+        <div class="success-icon">✅</div>
+
+        <div class="success-box">
+            <h1>Pagamento Realizado!</h1>
+            <p>Seu pedido foi processado com sucesso.</p>
+        </div>
+
+        <div class="order-info">
+            <div class="order-item">
+                <span class="order-label">Número do Pedido:</span>
+                <span class="order-value" id="orderNumber">-</span>
+            </div>
+            <div class="order-item">
+                <span class="order-label">Data/Hora:</span>
+                <span class="order-value" id="orderDate">-</span>
+            </div>
+            <div class="order-item">
+                <span class="order-label">Produto:</span>
+                <span class="order-value" id="productName">-</span>
+            </div>
+            <div class="order-item">
+                <span class="order-label">Jogador:</span>
+                <span class="order-value" id="playerName">-</span>
+            </div>
+            <div class="order-item">
+                <span class="order-label">Valor Total:</span>
+                <span class="order-value" id="totalAmount">-</span>
+            </div>
+        </div>
+
+        <div class="status-timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon done">✓</div>
+                <div class="timeline-text">
+                    <h3>Pagamento Aprovado</h3>
+                    <p>Seu pagamento foi processado com sucesso</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" id="deliveryItem">
+                <div class="timeline-icon pending">⏳</div>
+                <div class="timeline-text">
+                    <h3>Entrega do Produto</h3>
+                    <p id="deliveryStatus">Enviando para o servidor...</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-icon pending">📊</div>
+                <div class="timeline-text">
+                    <h3>Conclusão</h3>
+                    <p>Você será notificado quando tudo estiver concluído</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>💡 Dica:</strong> Se você estava offline, o produto será entregue quando você entrar no servidor. 
+            Você receberá uma mensagem confirmando a entrega.
+        </div>
+
+        <div class="actions">
+            <a href="store.html" class="btn btn-primary">🛍️ Voltar à Loja</a>
+            <a href="index.html" class="btn btn-secondary">🏠 Página Inicial</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Servidor Magnatas</h3>
+                    <p>A melhor experiência em Minecraft modded.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="store.html">Loja</a></li>
+                        <li><a href="equipe.html">Equipe</a></li>
+                        <li><a href="regras.html">Regras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Discord: discord.gg/magnatas</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carregar informações do pedido
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            
+            const orderNumber = params.get('order') || 'PED-000001';
+            const product = params.get('product') || 'MGT-Cash';
+            const player = params.get('player') || 'PlayerNick';
+            const amount = params.get('amount') || 'R$ 0,00';
+            
+            document.getElementById('orderNumber').textContent = orderNumber;
+            document.getElementById('productName').textContent = product;
+            document.getElementById('playerName').textContent = player;
+            document.getElementById('totalAmount').textContent = amount;
+            document.getElementById('orderDate').textContent = new Date().toLocaleString('pt-BR');
+            
+            // Simular entrega
+            setTimeout(() => {
+                document.querySelector('#deliveryItem .timeline-icon').className = 'timeline-icon done';
+                document.querySelector('#deliveryItem .timeline-icon').textContent = '✓';
+                document.getElementById('deliveryStatus').textContent = 'Produto entregue com sucesso!';
+            }, 3000);
+        });
+
+        // Menu responsivo
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

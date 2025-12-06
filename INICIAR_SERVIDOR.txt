@@ -1,0 +1,60 @@
+========================================
+  COMO INICIAR O SERVIDOR LOCAL
+========================================
+
+1. Abra o PowerShell ou Terminal
+2. Navegue até esta pasta:
+   cd "c:\Users\vinic\Desktop\Site"
+
+3. Execute o comando:
+   php -S localhost:8000 router.php
+
+4. Abra o navegador em:
+   http://localhost:8000
+
+========================================
+  PÁGINAS DISPONÍVEIS
+========================================
+
+• Página Principal:
+  http://localhost:8000/index.html
+
+• Loja:
+  http://localhost:8000/store.html
+
+• Checkout:
+  http://localhost:8000/checkout.html
+
+• Dashboard Admin:
+  http://localhost:8000/dashboard/
+
+========================================
+  SOLUÇÃO DE PROBLEMAS
+========================================
+
+❌ Erro: "php não é reconhecido"
+✅ Solução: Instale o PHP ou adicione ao PATH
+
+❌ Erro: "Address already in use"
+✅ Solução: Mude a porta: php -S localhost:8001 router.php
+
+❌ Erro: "ERR_INVALID_HTTP_RESPONSE"
+✅ Solução: 
+   1. Verifique se o servidor PHP está rodando
+   2. Use http://localhost:8000 (não https://)
+   3. Limpe o cache do navegador (Ctrl+Shift+Delete)
+
+========================================
+  ATALHO RÁPIDO (WINDOWS)
+========================================
+
+Crie um arquivo "iniciar.bat" com:
+@echo off
+cd /d "%~dp0"
+echo Iniciando servidor em http://localhost:8000
+php -S localhost:8000 router.php
+pause
+
+Depois clique 2x nele para iniciar!
+
+========================================

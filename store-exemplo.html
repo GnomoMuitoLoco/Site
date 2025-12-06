@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja - Servidor Magnatas | Doações para a Comunidade</title>
+    <title>Loja - Servidor Magnatas | Doações para a Comunidade (EXEMPLO)</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="store.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,8 +34,10 @@
             background: linear-gradient(135deg, var(--color-gray-dark) 0%, var(--color-gray) 100%);
             border: 1px solid var(--color-gray);
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1.25rem;
         }
+        
+
 
         .sidebar-title {
             font-size: 1rem;
@@ -78,13 +80,36 @@
             line-height: 1.4;
         }
 
+        .meta-details {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--color-white);
+            opacity: 0.8;
+        }
+
+        .meta-details div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+        }
+
         .top-donor-info {
             text-align: center;
         }
 
         .top-donor-badge {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
+        }
+
+        .top-donor-avatar {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 0.75rem;
+            image-rendering: pixelated;
+            border: 3px solid var(--color-yellow);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
 
         .top-donor-name {
@@ -102,26 +127,41 @@
         .recent-donations {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.25rem;
         }
 
         .donation-item {
-            padding: 0.75rem;
-            background: var(--color-gray-dark);
-            border-left: 3px solid var(--color-yellow);
-            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+        }
+
+        .donation-avatar {
+            width: 18px;
+            height: 18px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            image-rendering: pixelated;
+        }
+
+        .donation-info {
+            flex: 1;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
         }
 
         .donation-name {
-            font-weight: 600;
+            font-weight: 400;
             color: var(--color-white);
-            font-size: 0.9rem;
+            font-size: 0.75rem;
         }
 
         .donation-time {
-            font-size: 0.8rem;
-            color: var(--color-white);
-            margin-top: 0.25rem;
+            font-size: 0.65rem;
+            color: var(--color-yellow);
+            opacity: 0.7;
         }
 
         .placeholder {
@@ -384,7 +424,7 @@
     <section class="store-hero">
         <div class="container">
             <div class="store-hero-content">
-                <h2 class="store-hero-title">Loja Magnatas</h2>
+                <h2 class="store-hero-title">Loja Magnatas - EXEMPLO COM DADOS</h2>
             </div>
         </div>
     </section>
@@ -400,9 +440,23 @@
                     <div class="meta-info">
                         <div class="progress-container">
                             <div class="progress-bar">
-                                <div class="progress-fill" id="goalProgressBar" style="width: 0%"></div>
+                                <div class="progress-fill" style="width: 67%"></div>
                             </div>
-                            <p class="progress-percentage" id="goalProgressText">0% atingido</p>
+                            <p class="progress-percentage">67% atingido</p>
+                        </div>
+                        <div class="meta-details">
+                            <div>
+                                <span>Arrecadado:</span>
+                                <span style="color: var(--color-yellow); font-weight: 600;">R$ 3.350,00</span>
+                            </div>
+                            <div>
+                                <span>Meta:</span>
+                                <span style="font-weight: 600;">R$ 5.000,00</span>
+                            </div>
+                            <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--color-gray);">
+                                <span>Faltam:</span>
+                                <span style="color: var(--color-yellow); font-weight: 600;">R$ 1.650,00</span>
+                            </div>
                         </div>
                         <p class="meta-motivation">Cada contribuição nos aproxima de melhorias ainda maiores! 💙</p>
                     </div>
@@ -411,16 +465,71 @@
                 <!-- Top Doador -->
                 <div class="sidebar-card">
                     <h3 class="sidebar-title">👑 Top Doador</h3>
-                    <div class="top-donor-info" id="topDonorInfo">
-                        <p class="placeholder">Carregando...</p>
+                    <div class="top-donor-info">
+                        <div class="top-donor-badge">👑</div>
+                        <img src="https://minotar.net/body/DragonSlayer_YT/100.png" 
+                             alt="DragonSlayer_YT" 
+                             class="top-donor-avatar"
+                             onerror="this.src='https://minotar.net/body/Steve/100.png'">
+                        <div class="top-donor-name">DragonSlayer_YT</div>
+                        <div class="top-donor-amount">Total doado: R$ 850,00</div>
                     </div>
                 </div>
 
                 <!-- Doações Recentes -->
                 <div class="sidebar-card">
                     <h3 class="sidebar-title">💝 Doações Recentes</h3>
-                    <div class="recent-donations" id="recentDonations">
-                        <p class="placeholder">Nenhum registro</p>
+                    <div class="recent-donations">
+                        <div class="donation-item">
+                            <img src="https://minotar.net/avatar/MineKing_BR/32" 
+                                 alt="MineKing_BR" 
+                                 class="donation-avatar"
+                                 onerror="this.src='https://minotar.net/avatar/Steve/32'">
+                            <div class="donation-info">
+                                <span class="donation-name">MineKing_BR</span>
+                                <span class="donation-time">há 5 min</span>
+                            </div>
+                        </div>
+                        <div class="donation-item">
+                            <img src="https://minotar.net/avatar/CrafterPro2024/32" 
+                                 alt="CrafterPro2024" 
+                                 class="donation-avatar"
+                                 onerror="this.src='https://minotar.net/avatar/Steve/32'">
+                            <div class="donation-info">
+                                <span class="donation-name">CrafterPro2024</span>
+                                <span class="donation-time">há 23 min</span>
+                            </div>
+                        </div>
+                        <div class="donation-item">
+                            <img src="https://minotar.net/avatar/ShadowNinja/32" 
+                                 alt="ShadowNinja" 
+                                 class="donation-avatar"
+                                 onerror="this.src='https://minotar.net/avatar/Steve/32'">
+                            <div class="donation-info">
+                                <span class="donation-name">ShadowNinja</span>
+                                <span class="donation-time">há 1h</span>
+                            </div>
+                        </div>
+                        <div class="donation-item">
+                            <img src="https://minotar.net/avatar/BuilderMaster/32" 
+                                 alt="BuilderMaster" 
+                                 class="donation-avatar"
+                                 onerror="this.src='https://minotar.net/avatar/Steve/32'">
+                            <div class="donation-info">
+                                <span class="donation-name">BuilderMaster</span>
+                                <span class="donation-time">há 2h</span>
+                            </div>
+                        </div>
+                        <div class="donation-item">
+                            <img src="https://minotar.net/avatar/RedstoneGenius/32" 
+                                 alt="RedstoneGenius" 
+                                 class="donation-avatar"
+                                 onerror="this.src='https://minotar.net/avatar/Steve/32'">
+                            <div class="donation-info">
+                                <span class="donation-name">RedstoneGenius</span>
+                                <span class="donation-time">há 3h</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -435,13 +544,16 @@
 
                     <!-- Seletor de Servidor -->
                     <div class="server-selector-wrapper" style="margin: 0; padding: 2rem; border-top: none;">
-                        <label class="server-selector-title" for="serverSelect">Nenhum servidor disponível. Adicione pelo dashboard para habilitar compras.</label>
+                        <label class="server-selector-title" for="serverSelect">Selecione o servidor que você deseja comprar MGT-Cash:</label>
                         <div class="server-select-container">
-                            <select id="serverSelect" class="server-select" disabled>
-                                <option value="" selected disabled>Nenhum servidor cadastrado</option>
+                            <select id="serverSelect" class="server-select" onchange="enableBuyButton()">
+                                <option value="" selected disabled>Clique aqui para ver a lista de servidores</option>
+                                <option value="mgt">🏰 Servidor Magnatas</option>
+                                <option value="atm10">⚙️ ATM10</option>
+                                <option value="atm10tts">☁️ ATM10 To The Sky</option>
                             </select>
                         </div>
-                        <button id="buyButton" class="buy-btn" disabled>Comprar MGT-Cash</button>
+                        <button id="buyButton" class="buy-btn" onclick="alert('Redirecionando para checkout...')" disabled>Comprar MGT-Cash</button>
                     </div>
 
                     <div class="welcome-content">
@@ -542,49 +654,6 @@
     </footer>
 
     <script>
-        // Carregar servidores ao inicializar
-        window.addEventListener('DOMContentLoaded', () => {
-            loadServersToSelect();
-        });
-
-        // Função para carregar servidores disponíveis
-        async function loadServersToSelect() {
-            try {
-                const response = await fetch('backend/api_loja.php?path=servidores&ativo=true');
-                const data = await response.json();
-                
-                if (data.success && data.data && data.data.length > 0) {
-                    const select = document.getElementById('serverSelect');
-                    const label = document.querySelector('.server-selector-title');
-                    
-                    // Limpar opções antigas
-                    select.innerHTML = '<option value="" selected disabled>Selecione um servidor...</option>';
-                    
-                    // Adicionar servidores
-                    data.data.forEach(server => {
-                        const option = document.createElement('option');
-                        option.value = server.identificador; // usar identificador
-                        option.textContent = server.nome;
-                        option.dataset.id = server.id; // guardar ID numérico
-                        select.appendChild(option);
-                    });
-                    
-                    // Habilitar select
-                    select.disabled = false;
-                    label.textContent = 'Selecione um servidor para começar:';
-                    
-                    // Adicionar event listener
-                    select.addEventListener('change', enableBuyButton);
-                } else {
-                    // Nenhum servidor cadastrado
-                    document.querySelector('.server-selector-title').textContent = 
-                        'Nenhum servidor disponível. Adicione pelo dashboard para habilitar compras.';
-                }
-            } catch (error) {
-                console.error('Erro ao carregar servidores:', error);
-            }
-        }
-
         // Função para habilitar o botão de compra quando um servidor é selecionado
         function enableBuyButton() {
             const select = document.getElementById('serverSelect');
@@ -598,18 +667,6 @@
                 button.disabled = true;
             }
         }
-
-        // Função para prosseguir para o checkout
-        function proceedToCheckout() {
-            const select = document.getElementById('serverSelect');
-            const serverType = select.value;
-            
-            if (serverType) {
-                redirectToCheckout(serverType);
-            }
-        }
     </script>
-    <script src="store.js"></script>
 </body>
 </html>
-

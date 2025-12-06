@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Pagamento - Teste</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="store.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .method-icon {
+            font-size: 4rem;
+            margin: 1rem 0;
+        }
+
+        .info {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-approve {
+            background: linear-gradient(135deg, #00ff88 0%, #00ffff 100%);
+            color: #000;
+        }
+
+        .btn-approve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 200, 0.3);
+        }
+
+        .btn-cancel {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+        }
+
+        .notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .notice strong {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulador de Pagamento</h1>
+        <div class="method-icon" id="methodIcon">💳</div>
+        <p id="methodName" style="font-size: 1.2rem; color: #666; margin-bottom: 1rem;"></p>
+
+        <div class="info">
+            <div class="info-row">
+                <span class="info-label">ID da Transação:</span>
+                <span class="info-value" id="transactionId">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Método:</span>
+                <span class="info-value" id="method">-</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Status:</span>
+                <span class="info-value" style="color: #ffc107;">⏳ Aguardando confirmação</span>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn-approve" onclick="approvePayment()">
+                ✓ Aprovar Pagamento
+            </button>
+            <button class="btn-cancel" onclick="cancelPayment()">
+                ✗ Cancelar
+            </button>
+        </div>
+
+        <div class="notice">
+            <strong>⚠️ MODO DE TESTE</strong>
+            Esta é uma simulação para desenvolvimento. Em produção, você será redirecionado para o gateway de pagamento real (PayPal, Mercado Pago ou PIX).
+        </div>
+    </div>
+
+    <script>
+        // Obter parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const method = urlParams.get('method');
+        const transactionId = urlParams.get('id');
+
+        // Configurar informações do método
+        const methods = {
+            paypal: { icon: '💰', name: 'PayPal' },
+            mercadopago: { icon: '💵', name: 'Mercado Pago' },
+            pix: { icon: '⚡', name: 'PIX' }
+        };
+
+        if (method && methods[method]) {
+            document.getElementById('methodIcon').textContent = methods[method].icon;
+            document.getElementById('methodName').textContent = methods[method].name;
+            document.getElementById('method').textContent = methods[method].name;
+        }
+
+        document.getElementById('transactionId').textContent = transactionId || 'N/A';
+
+        function approvePayment() {
+            // Simular aprovação e redirecionar para página de sucesso
+            alert('✓ Pagamento aprovado com sucesso!\n\nEm produção, o webhook do gateway notificaria o servidor e entregaria o cash automaticamente.');
+            window.location.href = 'store.html?payment=success';
+        }
+
+        function cancelPayment() {
+            // Cancelar e voltar
+            if (confirm('Tem certeza que deseja cancelar o pagamento?')) {
+                alert('✗ Pagamento cancelado.');
+                window.location.href = 'store.html?payment=cancelled';
+            }
+        }
+    </script>
+</body>
+</html>

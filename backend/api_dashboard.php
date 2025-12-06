@@ -47,6 +47,10 @@ switch ($action) {
     case 'get_system_info':
         getSystemInfo();
         break;
+
+    case 'get_store_stats':
+        getStoreStats($conn);
+        break;
     
     default:
         http_response_code(400);
@@ -133,5 +137,36 @@ function getSystemInfo() {
     ];
 
     echo json_encode($info);
+}
+
+/**
+ * Obter estatísticas de vendas
+ */
+function getStoreStats($conn) {
+    // Considera apenas pagamentos aprovados
+    $sql = "
+        SELECT 
+            COALESCE(SUM(valor_total), 0) AS total_all,
+            COALESCE(SUM(CASE WHEN YEAR(criado_em) = YEAR(NOW()) THEN valor_total END), 0) AS total_year,
+            COALESCE(SUM(CASE WHEN YEAR(criado_em) = YEAR(NOW()) AND MONTH(criado_em) = MONTH(NOW()) THEN valor_total END), 0) AS total_month,
+            COALESCE(SUM(CASE WHEN DATE(criado_em) = CURDATE() THEN valor_total END), 0) AS total_today
+        FROM mgt_transacoes
+        WHERE status_pagamento = 'aprovado'
+    ";
+
+    $result = $conn->query($sql);
+    $row = $result ? $result->fetch_assoc() : [
+        'total_all' => 0,
+        'total_year' => 0,
+        'total_month' => 0,
+        'total_today' => 0,
+    ];
+
+    echo json_encode([
+        'total_all' => (float)$row['total_all'],
+        'total_year' => (float)$row['total_year'],
+        'total_month' => (float)$row['total_month'],
+        'total_today' => (float)$row['total_today'],
+    ]);
 }
 ?>

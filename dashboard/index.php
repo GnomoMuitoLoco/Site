@@ -59,9 +59,9 @@ $store_items = DashboardManager::getStoreItems();
             <ul class="menu">
                 <li><a href="#home" class="menu-item active">📊 Dashboard</a></li>
                 <li><a href="#loja" class="menu-item">🛍️ Loja</a></li>
-                <li><a href="#servidores" class="menu-item">🎮 Servidores</a></li>
-                <li><a href="#usuarios" class="menu-item">👥 Usuários</a></li>
-                <li><a href="#configuracoes" class="menu-item">⚙️ Configurações</a></li>
+                <!-- <li><a href="#servidores" class="menu-item">🎮 Servidores</a></li> -->
+                <!-- <li><a href="#usuarios" class="menu-item">👥 Usuários</a></li> -->
+                <!-- <li><a href="#configuracoes" class="menu-item">⚙️ Configurações</a></li> -->
                 <li><a href="/index.html" class="menu-item">🌐 Ver Site</a></li>
             </ul>
         </aside>
@@ -106,10 +106,6 @@ $store_items = DashboardManager::getStoreItems();
                         <a href="/index.html" class="action-btn">
                             <span class="action-icon">🌐</span>
                             <span>Ver Site</span>
-                        </a>
-                        <a href="#configuracoes" class="action-btn">
-                            <span class="action-icon">⚙️</span>
-                            <span>Configurações</span>
                         </a>
                         <a href="/backend/logout.php" class="action-btn" onclick="return confirm('Deseja sair?')">
                             <span class="action-icon">🚪</span>
@@ -221,6 +217,13 @@ $store_items = DashboardManager::getStoreItems();
         // Menu interativo
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Se o link não começa com #, permite navegação normal
+                if (!href.startsWith('#')) {
+                    return;
+                }
+                
                 e.preventDefault();
                 
                 // Remove active de todos os itens
@@ -233,7 +236,7 @@ $store_items = DashboardManager::getStoreItems();
                 });
                 
                 // Mostra a seção correspondente
-                const targetId = this.getAttribute('href').substring(1);
+                const targetId = href.substring(1);
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
                     targetSection.style.display = 'block';

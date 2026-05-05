@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servidor Magnatas - Network | Magia, Tecnologia e Aventura</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Servidor Magnatas: um network de servidores Minecraft com Magia, Tecnologia e Aventura. Jogue ATM10, All The Mons e o modpack Original com seus amigos.">
+    <meta name="keywords" content="servidor minecraft, modpack, ATM10, All The Mons, servidor magnatas, minecraft modded">
+    <meta name="author" content="Servidor Magnatas">
+    <link rel="canonical" href="https://servidormagnatas.com.br/">
+
+    <!-- Open Graph (WhatsApp, Facebook, Discord) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://servidormagnatas.com.br/">
+    <meta property="og:title" content="Servidor Magnatas - Network">
+    <meta property="og:description" content="Magia, Tecnologia e Aventura. Jogue nos nossos servidores de Minecraft modded com seus amigos!">
+    <meta property="og:image" content="assets/logo.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Servidor Magnatas - Network">
+    <meta name="twitter:description" content="Magia, Tecnologia e Aventura. Jogue nos nossos servidores de Minecraft modded!">
+    <meta name="twitter:image" content="assets/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,9 +110,9 @@
                     <div class="showcase-header">
                         <span class="server-indicator loading" id="indicator-mgt">●</span>
                         <h3>Servidor Magnatas</h3>
-                        <span class="server-badge original">Original</span>
+                        <span class="server-badge fixo">Fixo</span>
                     </div>
-                    <p class="showcase-description">O Servidor Magnatas é um modpack original feito por nós, o servidor tem uma pegada um pouco mais difícil, com receitas e progressão personalizada para tornar sua aventura desafiadora. O objetivo é se tornar imortal.</p>
+                    <p class="showcase-description">O Servidor Magnatas é um modpack original feito por nós, com receitas e progressão personalizada para uma experiência mais desafiadora. O objetivo final é se tornar imortal.</p>
                     <div class="showcase-info">
                         <div class="info-item">
                             <span class="info-label">IP:</span>
@@ -103,47 +127,24 @@
                 </div>
             </div>
 
-            <!-- ATM10 -->
-            <div class="showcase-server atm10">
+            <!-- All The Mons -->
+            <div class="showcase-server allthemons">
                 <div class="showcase-content">
                     <div class="showcase-header">
-                        <span class="server-indicator loading" id="indicator-atm10">●</span>
-                        <h3>ATM10 - All The Mods 10</h3>
-                        <span class="server-badge popular">Popular</span>
+                        <span class="server-indicator loading" id="indicator-allthemons">●</span>
+                        <h3>All The Mons</h3>
+                        <span class="server-badge rotativo">Rotativo</span>
                     </div>
-                    <p class="showcase-description">All The Mods 10 é um servidor criado pelo ATM Team com foco em diversos mods e progressão baseada em quests. É um modpack fácil de progredir com vasta liberdade para explorar mods de todos os tipos.</p>
+                    <p class="showcase-description">All The Mons é baseado no ATM10, trazendo a experiência clássica de mods com a adição de Pokémons. O servidor combina progressão por quests e liberdade para explorar, com créditos ao FTB Team pelo desenvolvimento do modpack.</p>
                     <div class="showcase-info">
                         <div class="info-item">
                             <span class="info-label">IP:</span>
-                            <span class="info-value">atm10.servidormagnatas.com.br</span>
-                            <button class="btn-copy-small" onclick="copyIP('atm10.servidormagnatas.com.br')">Copiar</button>
+                            <span class="info-value">allthemons.servidormagnatas.com.br</span>
+                            <button class="btn-copy-small" onclick="copyIP('allthemons.servidormagnatas.com.br')">Copiar</button>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Status:</span>
-                            <span class="info-value" id="status-text-atm10">Verificando...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ATM10 TTS -->
-            <div class="showcase-server atm10tts">
-                <div class="showcase-content">
-                    <div class="showcase-header">
-                        <span class="server-indicator loading" id="indicator-atm10tts">●</span>
-                        <h3>ATM10 TTS - All The Mods 10 To The Sky</h3>
-                        <span class="server-badge skyblock">SkyBlock</span>
-                    </div>
-                    <p class="showcase-description">All The Mods 10 To The Sky é uma versão praticamente igual ao ATM10, entretanto, ele foi reformulado para funcionar em sistema de SkyBlock, proporcionando uma gameplay totalmente diferente de um survival comum.</p>
-                    <div class="showcase-info">
-                        <div class="info-item">
-                            <span class="info-label">IP:</span>
-                            <span class="info-value">atm10tts.servidormagnatas.com.br</span>
-                            <button class="btn-copy-small" onclick="copyIP('atm10tts.servidormagnatas.com.br')">Copiar</button>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Status:</span>
-                            <span class="info-value" id="status-text-atm10tts">Verificando...</span>
+                            <span class="info-value" id="status-text-allthemons">Verificando...</span>
                         </div>
                     </div>
                 </div>
@@ -155,25 +156,28 @@
     <section class="server-status-section">
         <div class="container">
             <h2 class="section-title">Status dos Servidores</h2>
+
+            <!-- Network Total Players -->
+            <div class="network-players-card" id="network-players">
+                <div class="network-players-inner">
+                    <span class="server-indicator loading" id="indicator-network">●</span>
+                    <span class="network-players-label">Jogadores Online na Rede Magnatas</span>
+                    <span class="network-players-count" id="network-players-count">...</span>
+                </div>
+            </div>
+
             <div class="servers-grid">
-                <div class="server-status-card" id="status-atm10">
-                    <div class="server-status-header">
-                        <span class="server-indicator loading">●</span>
-                        <h3>ATM10</h3>
-                    </div>
-                    <p class="server-status-info">Carregando...</p>
-                </div>
-                <div class="server-status-card" id="status-atm10tts">
-                    <div class="server-status-header">
-                        <span class="server-indicator loading">●</span>
-                        <h3>ATM10 TTS</h3>
-                    </div>
-                    <p class="server-status-info">Carregando...</p>
-                </div>
                 <div class="server-status-card" id="status-mgt">
                     <div class="server-status-header">
                         <span class="server-indicator loading">●</span>
                         <h3>Magnatas Original</h3>
+                    </div>
+                    <p class="server-status-info">Carregando...</p>
+                </div>
+                <div class="server-status-card" id="status-allthemons">
+                    <div class="server-status-header">
+                        <span class="server-indicator loading">●</span>
+                        <h3>All The Mons</h3>
                     </div>
                     <p class="server-status-info">Carregando...</p>
                 </div>
@@ -292,7 +296,7 @@
 
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
+                <p>&copy; 2026 Servidor Magnatas. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

@@ -339,51 +339,17 @@ async function checkServerStatus(serverIP, elementId) {
     const statusCard = document.getElementById(elementId);
     if (!statusCard) return;
 
-    const indicator = statusCard.querySelector('.server-indicator');
+    const indicator   = statusCard.querySelector('.server-indicator');
     const infoElement = statusCard.querySelector('.server-status-info');
 
-    try {
-        // Tentando múltiplas APIs como fallback
-        const apis = [
-            `https://api.mcsrvstat.us/3/${serverIP}`,
-            `https://api.mcstatus.io/v2/status/java/${serverIP}`
-        ];
-
-        let data = null;
-        
-        // Tenta a primeira API (mcsrvstat)
-        try {
-            const response = await fetch(apis[0]);
-            if (response.ok) {
-                data = await response.json();
-                
-                if (data.online) {
-                    indicator.className = 'server-indicator online';
-                    const players = data.players?.online || 0;
-                    const maxPlayers = data.players?.max || 0;
-                    infoElement.textContent = `${players}/${maxPlayers} jogadores online`;
-                } else {
-                    throw new Error('Server offline');
-                }
-            }
-        } catch (e) {
-            // Fallback para a segunda API
-            const response = await fetch(apis[1]);
-            if (response.ok) {
-                data = await response.json();
-                
-                if (data.online) {
-                    indicator.className = 'server-indicator online';
-                    const players = data.players?.online || 0;
-                    const maxPlayers = data.players?.max || 0;
-                    infoElement.textContent = `${players}/${maxPlayers} jogadores online`;
-                } else {
-                    throw new Error('Server offline');
-                }
-            }
-        }
-    } catch (error) {
-        indicator.className = 'server-indicator offline';
+    const data = await fetchServerData(serverIP);
+    if (data?.online) {
+        indicator.className   = 'server-indicator online';
+        const players    = data.players?.online || 0;
+        const maxPlayers = data.players?.max    || 0;
+        infoElement.textContent = `${players}/${maxPlayers} jogadores online`;
+    } else {
+        indicator.className     = 'server-indicator offline';
         infoElement.textContent = 'Servidor offline ou em manutenção';
     }
 }
@@ -393,56 +359,85 @@ async function checkServerStatus(serverIP, elementId) {
 // ========================================
 
 async function checkShowcaseServerStatus(serverIP, indicatorId, statusTextId) {
-    const indicator = document.getElementById(indicatorId);
+    const indicator  = document.getElementById(indicatorId);
     const statusText = document.getElementById(statusTextId);
-    
     if (!indicator || !statusText) return;
 
-    try {
-        const response = await fetch(`https://api.mcsrvstat.us/3/${serverIP}`);
-        if (response.ok) {
-            const data = await response.json();
-            
-            if (data.online) {
-                indicator.className = 'server-indicator online';
-                const players = data.players?.online || 0;
-                const maxPlayers = data.players?.max || 0;
-                statusText.textContent = `${players}/${maxPlayers} jogadores online`;
-            } else {
-                throw new Error('Server offline');
-            }
-        }
-    } catch (error) {
-        indicator.className = 'server-indicator offline';
+    const data = await fetchServerData(serverIP);
+    if (data?.online) {
+        indicator.className  = 'server-indicator online';
+        const players    = data.players?.online || 0;
+        const maxPlayers = data.players?.max    || 0;
+        statusText.textContent = `${players}/${maxPlayers} jogadores online`;
+    } else {
+        indicator.className    = 'server-indicator offline';
         statusText.textContent = 'Offline ou em manutenção';
     }
 }
 
+// ========================================
+// NETWORK TOTAL PLAYERS (PROXY)
+// ========================================
+
+async function fetchServerData(ip) {
+    // Tenta mcsrvstat.us v3, depois mcstatus.io como fallback
+    const apis = [
+        `https://api.mcsrvstat.us/3/${ip}`,
+        `https://api.mcstatus.io/v2/status/java/${ip}`
+    ];
+    for (const url of apis) {
+        try {
+            const res = await fetch(url);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.online !== undefined) return data; // normalize: ambas as APIs têm "online"
+            }
+        } catch (_) { /* tenta o próximo */ }
+    }
+    return null;
+}
+
+async function checkNetworkPlayers() {
+    const indicator = document.getElementById('indicator-network');
+    const countEl   = document.getElementById('network-players-count');
+    if (!indicator || !countEl) return;
+
+    const data = await fetchServerData('jogar.servidormagnatas.com.br');
+
+    if (data?.online) {
+        indicator.className = 'server-indicator online';
+        const online = data.players?.online || 0;
+        const max    = data.players?.max    || 0;
+        countEl.textContent = `${online}/${max}`;
+    } else {
+        indicator.className = 'server-indicator offline';
+        countEl.textContent = 'Offline';
+    }
+}
+
 // Verificar status dos servidores ao carregar a página
-if (document.getElementById('status-atm10')) {
-    checkServerStatus('atm10.servidormagnatas.com.br', 'status-atm10');
-    checkServerStatus('atm10tts.servidormagnatas.com.br', 'status-atm10tts');
+if (document.getElementById('status-mgt')) {
+    checkNetworkPlayers();
     checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt');
+    checkServerStatus('allthemons.servidormagnatas.com.br', 'status-allthemons');
 
     // Atualizar status a cada 60 segundos
     setInterval(() => {
-        checkServerStatus('atm10.servidormagnatas.com.br', 'status-atm10');
-        checkServerStatus('atm10tts.servidormagnatas.com.br', 'status-atm10tts');
+        checkNetworkPlayers();
         checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt');
+        checkServerStatus('allthemons.servidormagnatas.com.br', 'status-allthemons');
     }, 60000);
 }
 
 // Verificar status dos servidores showcase
 if (document.getElementById('indicator-mgt')) {
     checkShowcaseServerStatus('mgt.servidormagnatas.com.br', 'indicator-mgt', 'status-text-mgt');
-    checkShowcaseServerStatus('atm10.servidormagnatas.com.br', 'indicator-atm10', 'status-text-atm10');
-    checkShowcaseServerStatus('atm10tts.servidormagnatas.com.br', 'indicator-atm10tts', 'status-text-atm10tts');
+    checkShowcaseServerStatus('allthemons.servidormagnatas.com.br', 'indicator-allthemons', 'status-text-allthemons');
 
     // Atualizar status a cada 60 segundos
     setInterval(() => {
         checkShowcaseServerStatus('mgt.servidormagnatas.com.br', 'indicator-mgt', 'status-text-mgt');
-        checkShowcaseServerStatus('atm10.servidormagnatas.com.br', 'indicator-atm10', 'status-text-atm10');
-        checkShowcaseServerStatus('atm10tts.servidormagnatas.com.br', 'indicator-atm10tts', 'status-text-atm10tts');
+        checkShowcaseServerStatus('allthemons.servidormagnatas.com.br', 'indicator-allthemons', 'status-text-allthemons');
     }, 60000);
 }
 
@@ -451,30 +446,36 @@ if (document.getElementById('indicator-mgt')) {
 // ========================================
 
 function copyIP(ip) {
-    // Criar elemento temporário para copiar
-    const tempInput = document.createElement('input');
-    tempInput.value = ip;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    
-    try {
-        document.execCommand('copy');
-        
-        // Feedback visual
-        const button = event.target;
-        const originalText = button.textContent;
-        button.textContent = '✓ IP Copiado!';
-        button.style.backgroundColor = '#00ff00';
-        
+    const button = event.target;
+    const originalText = button.textContent;
+
+    const doFeedback = () => {
+        button.textContent = '✓ Copiado!';
+        button.style.backgroundColor = '#4ade80';
         setTimeout(() => {
             button.textContent = originalText;
             button.style.backgroundColor = '';
         }, 2000);
-    } catch (err) {
-        alert('Erro ao copiar IP. Por favor, copie manualmente: ' + ip);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(ip).then(doFeedback).catch(() => {
+            alert('Erro ao copiar. Copie manualmente: ' + ip);
+        });
+    } else {
+        // Fallback para contextos não-HTTPS (ex: localhost)
+        const tempInput = document.createElement('input');
+        tempInput.value = ip;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+            document.execCommand('copy');
+            doFeedback();
+        } catch (err) {
+            alert('Erro ao copiar. Copie manualmente: ' + ip);
+        }
+        document.body.removeChild(tempInput);
     }
-    
-    document.body.removeChild(tempInput);
 }
 
 // Disponibilizar função globalmente

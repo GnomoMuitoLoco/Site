@@ -335,6 +335,23 @@ if (document.getElementById('discord-members-stat')) {
 // SERVER STATUS CHECK (NEW INTEGRATED LAYOUT)
 // ========================================
 
+async function fetchServerData(ip) {
+    const apis = [
+        `https://api.mcsrvstat.us/3/${ip}`,
+        `https://api.mcstatus.io/v2/status/java/${ip}`
+    ];
+    for (const url of apis) {
+        try {
+            const res = await fetch(url);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.online !== undefined) return data;
+            }
+        } catch (_) { /* tenta o próximo */ }
+    }
+    return null;
+}
+
 async function checkServerStatus(serverIP, elementId) {
     const statusCard = document.getElementById(elementId);
     if (!statusCard) return;
@@ -376,40 +393,74 @@ async function checkShowcaseServerStatus(serverIP, indicatorId, statusTextId) {
 }
 
 // ========================================
-// NETWORK TOTAL PLAYERS (PROXY)
+// NETWORK TOTAL PLAYERS (MGT-PROXY API)
 // ========================================
-
-async function fetchServerData(ip) {
-    // Tenta mcsrvstat.us v3, depois mcstatus.io como fallback
-    const apis = [
-        `https://api.mcsrvstat.us/3/${ip}`,
-        `https://api.mcstatus.io/v2/status/java/${ip}`
-    ];
-    for (const url of apis) {
-        try {
-            const res = await fetch(url);
-            if (res.ok) {
-                const data = await res.json();
-                if (data.online !== undefined) return data; // normalize: ambas as APIs têm "online"
-            }
-        } catch (_) { /* tenta o próximo */ }
-    }
-    return null;
-}
 
 async function checkNetworkPlayers() {
     const indicator = document.getElementById('indicator-network');
     const countEl   = document.getElementById('network-players-count');
     if (!indicator || !countEl) return;
 
-    const data = await fetchServerData('jogar.servidormagnatas.com.br');
+    // Tenta primeiro a API do MGT-Proxy
+    try {
+        const res = await fetch('http://jogar.servidormagnatas.com.br:8081/api/status');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
 
-    if (data?.online) {
-        indicator.className = 'server-indicator online';
-        const online = data.players?.online || 0;
-        const max    = data.players?.max    || 0;
-        countEl.textContent = `${online}/${max}`;
-    } else {
+        const data   = await res.json();
+        const online = data.total_online ?? 0;
+        const max    = data.total_max    ?? 0;
+
+        if (online > 0 || max > 0) {
+            indicator.className = 'server-indicator online';
+            countEl.textContent = `${online}/${max}`;
+            return;
+        }
+        throw new Error('zero values — usando fallback');
+    } catch (_) { /* cai no fallback abaixo */ }
+
+    // Fallback 1: tenta o IP do proxy via mcsrvstat/mcstatus (sem porta)
+    try {
+        const data   = await fetchServerData('jogar.servidormagnatas.com.br');
+        const online = data?.players?.online ?? 0;
+        const max    = data?.players?.max    ?? 0;
+
+        if (data?.online && (online > 0 || max > 0)) {
+            indicator.className = 'server-indicator online';
+            countEl.textContent = `${online}/${max}`;
+            return;
+        }
+        throw new Error('sem dados — usando fallback 2');
+    } catch (_) { /* cai no fallback abaixo */ }
+
+    // Fallback 2: consulta cada servidor individualmente e soma
+    try {
+        const servers = [
+            'mgt.servidormagnatas.com.br',
+            'rotativo.servidormagnatas.com.br'
+        ];
+
+        const results = await Promise.all(servers.map(ip => fetchServerData(ip)));
+
+        let totalOnline = 0;
+        let totalMax    = 0;
+        let anyOnline   = false;
+
+        results.forEach(data => {
+            if (data?.online) {
+                anyOnline    = true;
+                totalOnline += data.players?.online ?? 0;
+                totalMax    += data.players?.max    ?? 0;
+            }
+        });
+
+        if (anyOnline) {
+            indicator.className = 'server-indicator online';
+            countEl.textContent = `${totalOnline}/${totalMax}`;
+        } else {
+            indicator.className = 'server-indicator offline';
+            countEl.textContent = 'Offline';
+        }
+    } catch (_) {
         indicator.className = 'server-indicator offline';
         countEl.textContent = 'Offline';
     }

@@ -1361,6 +1361,45 @@ body {
     background-color: var(--color-black);
 }
 
+/* ── Network Total Players Card ── */
+.network-players-card {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.network-players-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-gray);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 50px;
+    padding: 0.55rem 1.4rem;
+    max-width: 480px;
+    width: 100%;
+}
+
+.network-players-label {
+    flex: 1;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.network-players-count {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-yellow);
+    background: rgba(255, 215, 0, 0.1);
+    padding: 0.15rem 0.65rem;
+    border-radius: 50px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
 .servers-grid {
     display: grid;
     gap: 3rem;

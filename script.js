@@ -470,25 +470,25 @@ async function checkNetworkPlayers() {
 if (document.getElementById('status-mgt')) {
     checkNetworkPlayers();
     checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt');
-    checkServerStatus('allthemons.servidormagnatas.com.br', 'status-allthemons');
+    checkServerStatus('rotativo.servidormagnatas.com.br', 'status-allthemons');
 
     // Atualizar status a cada 60 segundos
     setInterval(() => {
         checkNetworkPlayers();
         checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt');
-        checkServerStatus('allthemons.servidormagnatas.com.br', 'status-allthemons');
+        checkServerStatus('rotativo.servidormagnatas.com.br', 'status-allthemons');
     }, 60000);
 }
 
 // Verificar status dos servidores showcase
 if (document.getElementById('indicator-mgt')) {
     checkShowcaseServerStatus('mgt.servidormagnatas.com.br', 'indicator-mgt', 'status-text-mgt');
-    checkShowcaseServerStatus('allthemons.servidormagnatas.com.br', 'indicator-allthemons', 'status-text-allthemons');
+    checkShowcaseServerStatus('rotativo.servidormagnatas.com.br', 'indicator-allthemons', 'status-text-allthemons');
 
     // Atualizar status a cada 60 segundos
     setInterval(() => {
         checkShowcaseServerStatus('mgt.servidormagnatas.com.br', 'indicator-mgt', 'status-text-mgt');
-        checkShowcaseServerStatus('allthemons.servidormagnatas.com.br', 'indicator-allthemons', 'status-text-allthemons');
+        checkShowcaseServerStatus('rotativo.servidormagnatas.com.br', 'indicator-allthemons', 'status-text-allthemons');
     }, 60000);
 }
 

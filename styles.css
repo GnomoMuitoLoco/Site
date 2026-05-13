@@ -1362,42 +1362,39 @@ body {
 }
 
 /* ── Network Total Players Card ── */
-.network-players-card {
+.network-players-wrapper {
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
 }
 
-.network-players-inner {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--color-gray);
-    border: 1px solid rgba(255, 215, 0, 0.25);
-    border-radius: 50px;
-    padding: 0.55rem 1.4rem;
-    max-width: 480px;
+.network-players-card {
+    background: linear-gradient(135deg, var(--color-gray) 0%, var(--color-gray-dark) 100%);
+    border-radius: 12px;
+    padding: 1rem 2rem;
+    text-align: center;
+    border: 2px solid rgba(255, 215, 0, 0.1);
+    transition: all 0.3s ease;
     width: 100%;
+    max-width: 460px;
 }
 
-.network-players-label {
-    flex: 1;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.75);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.network-players-card:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
 }
 
-.network-players-count {
+.network-players-card .server-status-header {
+    margin-bottom: 0.4rem;
+}
+
+.network-players-card .server-status-header h3 {
+    font-size: 1rem;
+}
+
+.network-players-card .server-status-info {
     font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-yellow);
-    background: rgba(255, 215, 0, 0.1);
-    padding: 0.15rem 0.65rem;
-    border-radius: 50px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    margin: 0;
 }
 
 .servers-grid {

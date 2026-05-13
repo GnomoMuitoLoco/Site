@@ -410,7 +410,8 @@ async function checkNetworkPlayers() {
         const online = data.total_online ?? 0;
         const max    = data.total_max    ?? 0;
 
-        if (online > 0 || max > 0) {
+        // Só aceita se realmente houver jogadores reportados
+        if (online > 0) {
             indicator.className = 'server-indicator online';
             countEl.textContent = `${online}/${max}`;
             return;
@@ -424,7 +425,7 @@ async function checkNetworkPlayers() {
         const online = data?.players?.online ?? 0;
         const max    = data?.players?.max    ?? 0;
 
-        if (data?.online && (online > 0 || max > 0)) {
+        if (data?.online && online > 0) {
             indicator.className = 'server-indicator online';
             countEl.textContent = `${online}/${max}`;
             return;

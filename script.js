@@ -393,75 +393,39 @@ async function checkShowcaseServerStatus(serverIP, indicatorId, statusTextId) {
 }
 
 // ========================================
-// NETWORK TOTAL PLAYERS (MGT-PROXY API)
+// NETWORK TOTAL PLAYERS
+// Lê os valores já exibidos nos cards individuais — sem chamadas extras à API
 // ========================================
 
-async function checkNetworkPlayers() {
+function checkNetworkPlayers() {
     const indicator = document.getElementById('indicator-network');
     const countEl   = document.getElementById('network-players-count');
     if (!indicator || !countEl) return;
 
-    // Tenta primeiro a API do MGT-Proxy
-    try {
-        const res = await fetch('http://jogar.servidormagnatas.com.br:8081/api/status');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
+    const cardIds = ['status-mgt', 'status-allthemons'];
+    let totalOnline = 0;
+    let totalMax    = 0;
+    let anyOnline   = false;
 
-        const data   = await res.json();
-        const online = data.total_online ?? 0;
-        const max    = data.total_max    ?? 0;
-
-        // Só aceita se realmente houver jogadores reportados
-        if (online > 0) {
-            indicator.className = 'server-indicator online';
-            countEl.textContent = `${online}/${max}`;
-            return;
-        }
-        throw new Error('zero values — usando fallback');
-    } catch (_) { /* cai no fallback abaixo */ }
-
-    // Fallback 1: tenta o IP do proxy via mcsrvstat/mcstatus (sem porta)
-    try {
-        const data   = await fetchServerData('jogar.servidormagnatas.com.br');
-        const online = data?.players?.online ?? 0;
-        const max    = data?.players?.max    ?? 0;
-
-        if (data?.online && online > 0) {
-            indicator.className = 'server-indicator online';
-            countEl.textContent = `${online}/${max}`;
-            return;
-        }
-        throw new Error('sem dados — usando fallback 2');
-    } catch (_) { /* cai no fallback abaixo */ }
-
-    // Fallback 2: consulta cada servidor individualmente e soma
-    try {
-        const servers = [
-            'mgt.servidormagnatas.com.br',
-            'rotativo.servidormagnatas.com.br'
-        ];
-
-        const results = await Promise.all(servers.map(ip => fetchServerData(ip)));
-
-        let totalOnline = 0;
-        let totalMax    = 0;
-        let anyOnline   = false;
-
-        results.forEach(data => {
-            if (data?.online) {
-                anyOnline    = true;
-                totalOnline += data.players?.online ?? 0;
-                totalMax    += data.players?.max    ?? 0;
+    cardIds.forEach(id => {
+        const card = document.getElementById(id);
+        if (!card) return;
+        const ind  = card.querySelector('.server-indicator');
+        const info = card.querySelector('.server-status-info');
+        if (ind?.classList.contains('online') && info) {
+            const match = info.textContent.match(/(\d+)\/(\d+)/);
+            if (match) {
+                anyOnline   = true;
+                totalOnline += parseInt(match[1], 10);
+                totalMax    += parseInt(match[2], 10);
             }
-        });
-
-        if (anyOnline) {
-            indicator.className = 'server-indicator online';
-            countEl.textContent = `${totalOnline}/${totalMax}`;
-        } else {
-            indicator.className = 'server-indicator offline';
-            countEl.textContent = 'Offline';
         }
-    } catch (_) {
+    });
+
+    if (anyOnline) {
+        indicator.className = 'server-indicator online';
+        countEl.textContent = `${totalOnline}/${totalMax}`;
+    } else {
         indicator.className = 'server-indicator offline';
         countEl.textContent = 'Offline';
     }
@@ -469,16 +433,14 @@ async function checkNetworkPlayers() {
 
 // Verificar status dos servidores ao carregar a página
 if (document.getElementById('status-mgt')) {
-    checkNetworkPlayers();
-    checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt');
-    checkServerStatus('rotativo.servidormagnatas.com.br', 'status-allthemons');
+    const runStatusChecks = () =>
+        Promise.all([
+            checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt'),
+            checkServerStatus('rotativo.servidormagnatas.com.br', 'status-allthemons')
+        ]).then(checkNetworkPlayers); // roda APÓS ambos os cards serem atualizados
 
-    // Atualizar status a cada 60 segundos
-    setInterval(() => {
-        checkNetworkPlayers();
-        checkServerStatus('mgt.servidormagnatas.com.br', 'status-mgt');
-        checkServerStatus('rotativo.servidormagnatas.com.br', 'status-allthemons');
-    }, 60000);
+    runStatusChecks();
+    setInterval(runStatusChecks, 60000);
 }
 
 // Verificar status dos servidores showcase

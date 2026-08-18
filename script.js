@@ -136,6 +136,7 @@ const observer = new IntersectionObserver(function(entries) {
 // Animar cards de features, stats, etc
 const animateElements = document.querySelectorAll('.feature-card, .stat-item, .resource-item, .social-card, .event-card, .faq-item');
 animateElements.forEach(el => {
+    if (el.hasAttribute('data-reveal')) return; // Home v2 usa seu próprio sistema de reveal (ver bloco hv2-page abaixo)
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -496,3 +497,59 @@ function copyIP(ip) {
 window.copyIP = copyIP;
 
 console.log('🎮 Servidor Magnatas - Desenvolvido com ❤️');
+
+// ========================================
+// HOME V2 — reveal on scroll (data-reveal)
+// ========================================
+
+if (document.body.classList.contains('hv2-page')) {
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if (revealEls.length) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealEls.forEach((el) => revealObserver.observe(el));
+        setTimeout(() => {
+            document.querySelectorAll('[data-reveal]:not(.in)').forEach((el) => el.classList.add('in'));
+        }, 2500);
+    }
+
+    // ========================================
+    // HOME V2 — pill de status da rede (hero)
+    // ========================================
+
+    (function () {
+        const dot = document.getElementById('network-pill-dot');
+        const label = document.getElementById('network-pill-label');
+        if (!dot || !label) return;
+
+        async function updateNetworkPill() {
+            const [mgt, atm] = await Promise.all([
+                fetchServerData('mgt.servidormagnatas.com.br'),
+                fetchServerData('rotativo.servidormagnatas.com.br')
+            ]);
+            const loaded = mgt !== null || atm !== null;
+            const online = [mgt, atm].filter((d) => d && d.online);
+            const total = online.reduce((sum, d) => sum + ((d.players && d.players.online) || 0), 0);
+
+            if (!loaded) {
+                dot.style.color = '#FFD700';
+                label.textContent = 'Verificando a rede...';
+            } else if (online.length) {
+                dot.style.color = '#39FF14';
+                label.textContent = `${total} jogadores online agora`;
+            } else {
+                dot.style.color = '#FF00FF';
+                label.textContent = 'Rede offline ou em manutenção';
+            }
+        }
+
+        updateNetworkPill();
+        setInterval(updateNetworkPill, 60000);
+    })();
+}

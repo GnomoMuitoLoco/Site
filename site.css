@@ -460,11 +460,22 @@ img {
     animation: floatY 7s ease-in-out infinite;
 }
 
+/* O wrapper cuida do sobe-e-desce (floatY) e a imagem do hover:
+   se os dois mexessem em transform no mesmo elemento, um anularia o outro. */
 .hero-logo {
     max-width: 300px;
     width: 100%;
     height: auto;
     filter: drop-shadow(0 0 38px rgba(255, 215, 0, .34)) drop-shadow(0 16px 40px rgba(0, 0, 0, .9));
+    transition: transform .45s cubic-bezier(.2, .7, .2, 1), filter .45s ease;
+    will-change: transform;
+}
+
+.hero-logo:hover {
+    transform: scale(1.09);
+    filter: drop-shadow(0 0 60px rgba(255, 215, 0, .6))
+            drop-shadow(0 0 26px rgba(0, 255, 255, .3))
+            drop-shadow(0 20px 46px rgba(0, 0, 0, .95));
 }
 
 .hero-title {
@@ -1519,6 +1530,14 @@ img {
     .header-rule,
     .neon-rule {
         animation: none;
+    }
+
+    .hero-logo {
+        transition: none;
+    }
+
+    .hero-logo:hover {
+        transform: none;
     }
 
     [data-reveal] {

@@ -362,32 +362,99 @@ img {
     max-width: 840px;
 }
 
-.net-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-    padding: 8px 18px;
-    border: 1px solid rgba(0, 255, 255, .45);
-    border-radius: 999px;
-    font-family: var(--fonte-mono);
-    font-size: 11px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--ciano);
-    background: rgba(0, 255, 255, .05);
-    box-shadow: 0 0 18px rgba(0, 255, 255, .25), inset 0 0 18px rgba(0, 255, 255, .08);
-    margin-bottom: 28px;
-}
-
 .dot {
     animation: pulseDot 1.6s ease-in-out infinite;
     text-shadow: 0 0 12px currentColor;
 }
 
-.net-badge .dot {
-    font-size: 13px;
-    color: var(--ouro);
+/* Palco do hero: contador da rede | logo | contador do Discord.
+   As colunas laterais sao 1fr iguais, entao o logo fica centrado
+   de verdade mesmo quando um dos lados esta escondido. */
+.hero-stage {
+    display: grid;
+    /* minmax(0,...) e nao 1fr puro: sem isso a coluna mais larga empurra
+       a outra e o logo sai do centro. */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
 }
+
+.hero-stat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-transform: uppercase;
+    transition: transform .25s;
+}
+
+.hero-stat[hidden] {
+    display: none;
+}
+
+.hero-stat--rede {
+    justify-self: start;
+}
+
+.hero-stat--discord {
+    justify-self: end;
+    text-align: right;
+}
+
+.stat-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border: 1px solid currentColor;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .03);
+    transition: box-shadow .25s;
+}
+
+.stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.stat-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.stat-valor,
+.stat-legenda {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stat-valor {
+    font-family: var(--fonte-mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    color: rgba(242, 242, 242, .55);
+}
+
+.stat-legenda {
+    font-family: var(--fonte-titulo);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .14em;
+    color: #fff;
+}
+
+.hero-stat--rede { color: var(--ciano); }
+.hero-stat--rede .stat-icon { box-shadow: 0 0 16px rgba(0, 255, 255, .22), inset 0 0 14px rgba(0, 255, 255, .08); }
+.hero-stat--rede:hover { color: var(--ciano); transform: translateY(-2px); }
+.hero-stat--rede:hover .stat-icon { box-shadow: 0 0 26px rgba(0, 255, 255, .5), inset 0 0 18px rgba(0, 255, 255, .14); }
+
+.hero-stat--discord { color: var(--magenta); }
+.hero-stat--discord .stat-icon { box-shadow: 0 0 16px rgba(255, 0, 255, .22), inset 0 0 14px rgba(255, 0, 255, .08); }
+.hero-stat--discord:hover { color: var(--magenta); transform: translateY(-2px); }
+.hero-stat--discord:hover .stat-icon { box-shadow: 0 0 26px rgba(255, 0, 255, .5), inset 0 0 18px rgba(255, 0, 255, .14); }
 
 .hero-logo-wrap {
     animation: floatY 7s ease-in-out infinite;
@@ -1170,12 +1237,6 @@ img {
     margin: 0;
 }
 
-.role-count {
-    font-family: var(--fonte-mono);
-    font-size: 10px;
-    letter-spacing: .16em;
-}
-
 .role-rule {
     height: 1px;
     margin-bottom: 20px;
@@ -1229,7 +1290,6 @@ img {
 }
 
 /* donos */
-.role-group--ouro .role-count { color: rgba(255, 215, 0, .7); }
 .role-group--ouro .role-rule { background: linear-gradient(90deg, var(--ouro), rgba(255, 165, 0, .2), transparent); box-shadow: 0 0 12px rgba(255, 215, 0, .5); }
 .role-group--ouro .member-card { border-color: rgba(255, 215, 0, .22); }
 .role-group--ouro .member-card:hover { transform: translateX(6px); border-color: rgba(255, 215, 0, .6); box-shadow: 0 0 30px rgba(255, 165, 0, .2); }
@@ -1242,7 +1302,6 @@ img {
 }
 
 /* administradores */
-.role-group--magenta .role-count { color: rgba(255, 0, 255, .75); }
 .role-group--magenta .role-rule { background: linear-gradient(90deg, var(--magenta), rgba(255, 0, 255, .15), transparent); box-shadow: 0 0 12px rgba(255, 0, 255, .6); }
 .role-group--magenta .member-card { border-color: rgba(255, 0, 255, .2); }
 .role-group--magenta .member-card:hover { transform: translateX(6px); border-color: rgba(255, 0, 255, .6); box-shadow: 0 0 30px rgba(255, 0, 255, .2); }
@@ -1250,7 +1309,6 @@ img {
 .role-group--magenta .member-tag { color: var(--magenta); text-shadow: 0 0 10px rgba(255, 0, 255, .5); }
 
 /* moderadores */
-.role-group--ciano .role-count { color: rgba(0, 255, 255, .75); }
 .role-group--ciano .role-rule { background: linear-gradient(90deg, var(--ciano), rgba(0, 255, 255, .15), transparent); box-shadow: 0 0 12px rgba(0, 255, 255, .6); }
 .role-group--ciano .member-card { border-color: rgba(0, 255, 255, .2); }
 .role-group--ciano .member-card:hover { transform: translateX(6px); border-color: rgba(0, 255, 255, .6); box-shadow: 0 0 30px rgba(0, 255, 255, .2); }
@@ -1258,7 +1316,6 @@ img {
 .role-group--ciano .member-tag { color: var(--ciano); text-shadow: 0 0 10px rgba(0, 255, 255, .5); }
 
 /* ajudantes */
-.role-group--lima .role-count { color: rgba(57, 255, 20, .75); }
 .role-group--lima .role-rule { background: linear-gradient(90deg, var(--lima), rgba(57, 255, 20, .15), transparent); box-shadow: 0 0 12px rgba(57, 255, 20, .6); }
 .role-group--lima .member-card { border-color: rgba(57, 255, 20, .2); }
 .role-group--lima .member-card:hover { transform: translateX(6px); border-color: rgba(57, 255, 20, .6); box-shadow: 0 0 30px rgba(57, 255, 20, .18); }
@@ -1313,6 +1370,48 @@ img {
 }
 
 /* ---------- responsivo ---------- */
+
+/* Abaixo de 900px o logo sobe e os dois contadores dividem a linha
+   debaixo; abaixo de 560px eles empilham centralizados. */
+@media (max-width: 900px) {
+    .hero-stage {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 20px;
+    }
+
+    .hero-logo-wrap {
+        order: -1;
+        grid-column: 1 / -1;
+    }
+
+    .hero-stat--rede {
+        justify-self: end;
+    }
+
+    .hero-stat--discord {
+        justify-self: start;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero-stage {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    /* Largura fixa para os dois ficarem do mesmo tamanho empilhados;
+       250px cabe a legenda mais longa sem reticencias. */
+    .hero-stat {
+        justify-self: center !important;
+        width: 250px;
+        max-width: 100%;
+    }
+
+    .hero-stat--discord {
+        flex-direction: row-reverse;
+        text-align: left;
+    }
+}
 
 @media (max-width: 1080px) {
     .header-inner {

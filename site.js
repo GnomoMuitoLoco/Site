@@ -7,6 +7,8 @@
      data-mostrar-status   "true" | "false"   (padrao true)
      data-intervalo-status  segundos, 15 a 300 (padrao 60)
      data-animacoes        "true" | "false"   (padrao true)
+     data-discord-guild    id do servidor do Discord; sem ele o
+                           contador de membros nem aparece
    =========================================================== */
 
 (function () {
@@ -32,7 +34,8 @@
         return {
             mostrarStatus: d.mostrarStatus !== 'false',
             intervaloStatus: Math.min(300, Math.max(15, intervalo)),
-            animacoes: d.animacoes !== 'false'
+            animacoes: d.animacoes !== 'false',
+            discordGuild: d.discordGuild || null
         };
     }
 
@@ -122,14 +125,15 @@
         var online = [dados.mgt, dados.atm].filter(function (d) { return d && d.online; });
         var total = online.reduce(function (s, d) { return s + jogadores(d); }, 0);
 
-        var rotulo = 'Verificando a rede...';
+        var curto = 'Verificando...';
+        var longo = 'Verificando a rede...';
         if (carregou) {
-            rotulo = online.length ? total + ' jogadores online agora' : 'Rede offline ou em manutenção';
+            curto = online.length ? total + ' jogadores online' : 'Offline ou em manutenção';
+            longo = online.length ? total + ' jogadores online agora' : 'Rede offline ou em manutenção';
         }
 
-        texto('net-label', rotulo);
-        texto('net-label-2', rotulo);
-        cor('net-dot', !carregou ? COR_CARREGANDO : (online.length ? COR_ONLINE : COR_OFFLINE));
+        texto('net-label', curto);
+        texto('net-label-2', longo);
     }
 
     function carregar() {
@@ -141,6 +145,26 @@
             dados.atm = r[1];
             pintar();
         });
+    }
+
+    /* ---------- membros online no Discord ---------- */
+
+    /* O widget publico do Discord so responde com o widget habilitado nas
+       configuracoes do servidor. Usa-se presence_count: a lista "members"
+       vem cortada em 100 pela propria API e nao serve de contagem. */
+    function carregarDiscord() {
+        var selo = document.getElementById('discord-stat');
+        if (!selo || !opcoes.discordGuild) return;
+
+        fetch('https://discord.com/api/guilds/' + opcoes.discordGuild + '/widget.json')
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (d) {
+                var online = d && d.presence_count;
+                if (typeof online !== 'number') { selo.hidden = true; return; }
+                texto('discord-label', online + ' membros online');
+                selo.hidden = false;
+            })
+            .catch(function () { selo.hidden = true; });
     }
 
     /* ---------- copiar IP ---------- */
@@ -182,7 +206,8 @@
 
     if (opcoes.mostrarStatus) {
         carregar();
-        timer = setInterval(carregar, opcoes.intervaloStatus * 1000);
+        carregarDiscord();
+        timer = setInterval(function () { carregar(); carregarDiscord(); }, opcoes.intervaloStatus * 1000);
         window.addEventListener('pagehide', function () { clearInterval(timer); });
     }
 })();

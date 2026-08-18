@@ -1,188 +1,212 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa Equipe - Servidor Magnatas</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Nossa Equipe — Servidor Magnatas</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Conheça a equipe do Servidor Magnatas: donos, administradores, moderadores e ajudantes que mantêm a rede funcionando.">
+    <link rel="canonical" href="https://www.servidormagnatas.com.br/equipe.html">
+
+    <!-- Open Graph (WhatsApp, Facebook, Discord) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nossa Equipe — Servidor Magnatas">
+    <meta property="og:description" content="Conheça quem mantém o Servidor Magnatas funcionando.">
+    <meta property="og:image" content="https://www.servidormagnatas.com.br/assets/logo-magnatas-trim.png">
+    <meta property="og:url" content="https://www.servidormagnatas.com.br/equipe.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/logo2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <img src="assets/logo.png" alt="Logo Servidor Magnatas" class="nav-logo" onerror="this.style.display='none'">
-                <h1>Servidor <span>Magnatas</span></h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Início</a></li>
-                <li><a href="index.html#servidores" class="nav-link">Servidores</a></li>
-                <li><a href="index.html#votar" class="nav-link">Votar</a></li>
-                <li><a href="equipe.html" class="nav-link active">Nossa Equipe</a></li>
-                <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" class="nav-link" target="_blank">Wiki</a></li>
-                <li><a href="https://loja.servidormagnatas.com.br/store" class="nav-link" target="_blank">Loja</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+<!-- Sem consulta de status nesta pagina; ver site.js -->
+<body data-mostrar-status="false" data-animacoes="true">
+<div class="page">
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Nossa Equipe</h1>
-            <p>Conheça quem mantém o servidor funcionando</p>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html">
+                <img class="brand-logo" src="assets/logo-magnatas-trim.png" alt="Magnatas">
+                <span class="brand-name">Servidor <span class="texto-ouro">Magnatas</span></span>
+            </a>
+            <nav class="site-nav">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="index.html#servidores">Servidores</a>
+                <a class="nav-link" href="index.html#votar">Votar</a>
+                <a class="nav-link is-active" href="equipe.html">Equipe</a>
+                <a class="nav-link" href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank" rel="noopener">Wiki</a>
+                <a class="nav-link" href="https://loja.servidormagnatas.com.br/store" target="_blank" rel="noopener">Loja</a>
+                <a class="nav-cta" href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">Discord</a>
+            </nav>
         </div>
+        <div class="header-rule"></div>
+    </header>
+
+    <!-- Topo da pagina -->
+    <section class="page-hero">
+        <div class="page-hero-glow"></div>
+        <div class="page-hero-grid"></div>
+        <div class="page-hero-inner">
+            <p class="eyebrow eyebrow--magenta">Servidor Magnatas</p>
+            <h1 class="page-title">Nossa Equipe</h1>
+            <div class="page-underline"></div>
+            <p class="page-lead">Conheça quem mantém o servidor funcionando</p>
+        </div>
+        <div class="page-hero-edge"></div>
     </section>
 
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="container">
-            <div class="team-intro">
-                <h2>Conheça Nossa Equipe</h2>
+    <!-- Equipe -->
+    <section class="team">
+        <div class="team-wrap">
+            <div class="team-intro" data-reveal>
+                <h2 class="texto-ouro">Conheça Nossa Equipe</h2>
                 <p>Nossa equipe é composta por amigos e jogadores voluntários que dedicam seu tempo para manter o servidor funcionando</p>
             </div>
 
-            <!-- Team Members Container -->
-            <div class="team-container">
-                <!-- Donos -->
-                <div class="role-section">
-                    <div class="role-header">
-                        <span class="role-icon"></span>
-                        <h3>Donos</h3>
-                    </div>
-                    <div class="members-list">
-                        <div class="member-card owner">
-                            <img src="https://minotar.net/avatar/GnomoMuitoLouco/64" alt="GnomoMuitoLouco" class="member-avatar">
-                            <div class="member-info">
-                                <h4>GnomoMuitoLouco</h4>
-                                <span class="member-tag">Fundador e Líder do Servidor</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="role-group role-group--ouro" data-reveal>
+                <div class="role-head">
+                    <h3 class="role-name">Donos</h3>
+                    <span class="role-count">01</span>
                 </div>
-
-                <!-- Administradores -->
-                <div class="role-section">
-                    <div class="role-header">
-                        <span class="role-icon"></span>
-                        <h3>Administradores</h3>
-                    </div>
-                    <div class="members-list">
-                        <div class="member-card admin">
-                            <img src="https://minotar.net/avatar/Hugo007_/64" alt="Hugo007_" class="member-avatar">
-                            <div class="member-info">
-                                <h4>Hugo007_</h4>
-                                <span class="member-tag">Administrador</span>
-                            </div>
-                        </div>
-                        <div class="member-card admin">
-                            <img src="https://minotar.net/avatar/Kontsuko/64" alt="Kontsuko" class="member-avatar">
-                            <div class="member-info">
-                                <h4>Kontsuko</h4>
-                                <span class="member-tag">Administrador e Líder de Equipe</span>
-                            </div>
-                        </div>
-                        <div class="member-card admin">
-                            <img src="https://minotar.net/avatar/Mynothauro/64" alt="Mynothauro" class="member-avatar">
-                            <div class="member-info">
-                                <h4>Mynothauro</h4>
-                                <span class="member-tag">Administrador</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Moderadores -->
-                <div class="role-section">
-                    <div class="role-header">
-                        <span class="role-icon">️</span>
-                        <h3>Moderadores</h3>
-                    </div>
-                    <div class="members-list">
-                        <div class="member-card mod">
-                            <img src="https://minotar.net/avatar/Hypedrs/64" alt="Hypedrs" class="member-avatar">
-                            <div class="member-info">
-                                <h4>Hypedrs</h4>
-                                <span class="member-tag">Moderador</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ajudantes -->
-                <div class="role-section">
-                    <div class="role-header">
-                        <span class="role-icon"></span>
-                        <h3>Ajudantes</h3>
-                    </div>
-                    <div class="members-list">
-                        <div class="member-card helper">
-                            <img src="https://minotar.net/avatar/TrueK45/64" alt="TrueK45" class="member-avatar">
-                            <div class="member-info">
-                                <h4>TrueK45</h4>
-                                <span class="member-tag">Ajudante</span>
-                            </div>
+                <div class="role-rule"></div>
+                <div class="member-list">
+                    <div class="member-card">
+                        <img class="member-avatar" src="https://minotar.net/avatar/GnomoMuitoLouco/64" alt="GnomoMuitoLouco">
+                        <div class="member-info">
+                            <h4 class="member-name">GnomoMuitoLouco</h4>
+                            <span class="member-tag">Fundador e Líder do Servidor</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="join-team">
-                <h2>Quer Fazer Parte da Nossa Equipe?</h2>
-                <p>Estamos sempre em busca de membros dedicados e apaixonados pela comunidade!</p>
-                <a href="https://discord.gg/VewgTM2rNu" target="_blank" class="btn btn-primary">Candidatar-se no Discord</a>
+            <div class="role-group role-group--magenta" data-reveal>
+                <div class="role-head">
+                    <h3 class="role-name">Administradores</h3>
+                    <span class="role-count">03</span>
+                </div>
+                <div class="role-rule"></div>
+                <div class="member-list">
+                    <div class="member-card">
+                        <img class="member-avatar" src="https://minotar.net/avatar/Hugo007_/64" alt="Hugo007_">
+                        <div class="member-info">
+                            <h4 class="member-name">Hugo007_</h4>
+                            <span class="member-tag">Administrador</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <img class="member-avatar" src="https://minotar.net/avatar/Kontsuko/64" alt="Kontsuko">
+                        <div class="member-info">
+                            <h4 class="member-name">Kontsuko</h4>
+                            <span class="member-tag">Administrador e Líder de Equipe</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <img class="member-avatar" src="https://minotar.net/avatar/Mynothauro/64" alt="Mynothauro">
+                        <div class="member-info">
+                            <h4 class="member-name">Mynothauro</h4>
+                            <span class="member-tag">Administrador</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="role-group role-group--ciano" data-reveal>
+                <div class="role-head">
+                    <h3 class="role-name">Moderadores</h3>
+                    <span class="role-count">01</span>
+                </div>
+                <div class="role-rule"></div>
+                <div class="member-list">
+                    <div class="member-card">
+                        <img class="member-avatar" src="https://minotar.net/avatar/Hypedrs/64" alt="Hypedrs">
+                        <div class="member-info">
+                            <h4 class="member-name">Hypedrs</h4>
+                            <span class="member-tag">Moderador</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="role-group role-group--lima" data-reveal>
+                <div class="role-head">
+                    <h3 class="role-name">Ajudantes</h3>
+                    <span class="role-count">01</span>
+                </div>
+                <div class="role-rule"></div>
+                <div class="member-list">
+                    <div class="member-card">
+                        <img class="member-avatar" src="https://minotar.net/avatar/TrueK45/64" alt="TrueK45">
+                        <div class="member-info">
+                            <h4 class="member-name">TrueK45</h4>
+                            <span class="member-tag">Ajudante</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="join-team" data-reveal>
+                <div class="join-topline"></div>
+                <h2 class="join-title">Quer Fazer Parte da Nossa Equipe?</h2>
+                <p class="join-text">Estamos sempre em busca de membros dedicados e apaixonados pela comunidade!</p>
+                <a class="btn btn--ouro btn--ouro-medio" href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">
+                    <span class="sheen"></span>
+                    Candidatar-se no Discord
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Servidor <span>Magnatas</span></h3>
-                    <p>Magia, Tecnologia e Aventura</p>
+    <!-- Rodape -->
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <img class="footer-logo" src="assets/logo-magnatas-trim.png" alt="Magnatas">
+                        <span class="footer-brand-name">Servidor <span class="texto-ouro">Magnatas</span></span>
+                    </div>
+                    <p class="footer-tagline">Magia, Tecnologia e Aventura</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="index.html#servidores">Servidores</a></li>
-                        <li><a href="index.html#votar">Votar</a></li>
-                        <li><a href="equipe.html">Nossa Equipe</a></li>
-                    </ul>
+                <div class="footer-col--ciano">
+                    <h4 class="footer-title footer-title--ciano">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Início</a>
+                        <a href="index.html#servidores">Servidores</a>
+                        <a href="index.html#votar">Votar</a>
+                        <a href="equipe.html">Nossa Equipe</a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Externos</h4>
-                    <ul>
-                        <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank">Wiki</a></li>
-                        <li><a href="https://loja.servidormagnatas.com.br/store" target="_blank">Loja</a></li>
-                    </ul>
+                <div class="footer-col--magenta">
+                    <h4 class="footer-title footer-title--magenta">Links Externos</h4>
+                    <div class="footer-links">
+                        <a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank" rel="noopener">Wiki</a>
+                        <a href="https://loja.servidormagnatas.com.br/store" target="_blank" rel="noopener">Loja</a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Redes Sociais</h4>
-                    <ul>
-                        <li><a href="https://discord.gg/VewgTM2rNu" target="_blank">Discord</a></li>
-                        <li><a href="https://www.tiktok.com/@servidormagnatas" target="_blank">TikTok</a></li>
-                        <li><a href="https://www.youtube.com/@GnomoMuitoLoco" target="_blank">YouTube</a></li>
-                        <li><a href="https://www.facebook.com/servidormagnatas/" target="_blank">Facebook</a></li>
-                        <li><a href="https://twitter.com/ServidrMagnatas" target="_blank">Twitter</a></li>
-                    </ul>
+                <div class="footer-col--lima">
+                    <h4 class="footer-title footer-title--lima">Redes Sociais</h4>
+                    <div class="footer-links">
+                        <a href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">Discord</a>
+                        <a href="https://www.tiktok.com/@servidormagnatas" target="_blank" rel="noopener">TikTok</a>
+                        <a href="https://www.youtube.com/@GnomoMuitoLoco" target="_blank" rel="noopener">YouTube</a>
+                        <a href="https://www.facebook.com/servidormagnatas/" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://twitter.com/ServidrMagnatas" target="_blank" rel="noopener">Twitter</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Servidor Magnatas. Todos os direitos reservados.</p>
-            </div>
+            <div class="footer-rule"></div>
+            <p class="footer-legal">&copy; 2026 Servidor Magnatas. Todos os direitos reservados.</p>
         </div>
     </footer>
+</div>
 
-    <script src="script.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

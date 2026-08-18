@@ -1,302 +1,302 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servidor Magnatas — Minecraft Modpack de Magia, Tecnologia e Aventura</title>
 
     <!-- SEO -->
     <meta name="description" content="Servidor Magnatas: rede de Minecraft com modpack original de magia, tecnologia e aventura, e o servidor rotativo All The Mods - ATM10. Entre agora, é grátis.">
-    <meta name="keywords" content="servidor minecraft, modpack, ATM10, All The Mods, servidor magnatas, minecraft modded">
-    <meta name="author" content="Servidor Magnatas">
-    <link rel="canonical" href="https://servidormagnatas.com.br/">
+    <link rel="canonical" href="https://www.servidormagnatas.com.br/">
 
     <!-- Open Graph (WhatsApp, Facebook, Discord) -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://servidormagnatas.com.br/">
     <meta property="og:title" content="Servidor Magnatas — Minecraft Modpack de Magia, Tecnologia e Aventura">
     <meta property="og:description" content="Rede de Minecraft com modpack original e servidor rotativo All The Mods - ATM10. Magia, tecnologia e aventura.">
-    <meta property="og:image" content="assets/logo-magnatas-trim.png">
+    <meta property="og:image" content="https://www.servidormagnatas.com.br/assets/logo-magnatas-trim.png">
+    <meta property="og:url" content="https://www.servidormagnatas.com.br/">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Servidor Magnatas — Minecraft Modpack de Magia, Tecnologia e Aventura">
-    <meta name="twitter:description" content="Rede de Minecraft com modpack original e servidor rotativo All The Mods - ATM10.">
-    <meta name="twitter:image" content="assets/logo-magnatas-trim.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/logo2.png">
-    <link rel="apple-touch-icon" href="assets/logo2.png">
-
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/logo2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
 </head>
-<body class="hv2-page">
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <img src="assets/logo-magnatas-trim.png" alt="Logo Servidor Magnatas" class="nav-logo" onerror="this.style.display='none'">
-                <h1>Servidor <span>Magnatas</span></h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Início</a></li>
-                <li><a href="#servidores" class="nav-link">Servidores</a></li>
-                <li><a href="#votar" class="nav-link">Votar</a></li>
-                <li><a href="equipe.html" class="nav-link">Equipe</a></li>
-                <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" class="nav-link" target="_blank">Wiki</a></li>
-                <li><a href="https://loja.servidormagnatas.com.br/store" class="nav-link" target="_blank">Loja</a></li>
-                <li><a href="https://discord.gg/VewgTM2rNu" class="nav-link hv2-nav-discord" target="_blank">Discord</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+<!-- data-mostrar-status / data-intervalo-status / data-animacoes: ver site.js -->
+<body data-mostrar-status="true" data-intervalo-status="60" data-animacoes="true">
+<div class="page">
 
-    <!-- Hero Section -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html">
+                <img class="brand-logo" src="assets/logo-magnatas-trim.png" alt="Magnatas">
+                <span class="brand-name">Servidor <span class="texto-ouro">Magnatas</span></span>
+            </a>
+            <nav class="site-nav">
+                <a class="nav-link is-active" href="index.html">Início</a>
+                <a class="nav-link" href="#servidores">Servidores</a>
+                <a class="nav-link" href="#votar">Votar</a>
+                <a class="nav-link" href="equipe.html">Equipe</a>
+                <a class="nav-link" href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank" rel="noopener">Wiki</a>
+                <a class="nav-link" href="https://loja.servidormagnatas.com.br/store" target="_blank" rel="noopener">Loja</a>
+                <a class="nav-cta" href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">Discord</a>
+            </nav>
+        </div>
+        <div class="header-rule"></div>
+    </header>
+
+    <!-- Hero -->
     <section class="hero">
-        <div class="hv2-hero-grid"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hv2-badge-pill">
-                    <span id="network-pill-dot" class="hv2-pill-dot">●</span>
-                    <span id="network-pill-label">Verificando a rede...</span>
-                </div>
-                <div class="hero-logo-container hv2-float">
-                    <img src="assets/logo-magnatas-trim.png" alt="Servidor Magnatas" class="hero-logo" onerror="this.style.display='none'; document.querySelector('.hero-title').style.display='block';">
-                    <h2 class="hero-title" style="display: none;">Servidor Magnatas</h2>
-                </div>
-                <p class="hero-subtitle">Magia, Tecnologia e Aventura</p>
-                <div class="hv2-hero-divider"></div>
-                <p class="hero-cta-text">Convide seus amigos para jogar!</p>
-                <div class="hero-buttons">
-                    <a href="https://discord.gg/VewgTM2rNu" class="btn btn-primary hv2-sheen" target="_blank">Baixar Modpack</a>
-                    <a href="#servidores" class="btn btn-secondary">Ver Servidores</a>
-                </div>
+        <div class="hero-bg"></div>
+        <div class="hero-veil"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-inner">
+            <div class="net-badge">
+                <span class="dot" id="net-dot">●</span>
+                <span id="net-label">Verificando a rede...</span>
+            </div>
+            <div class="hero-logo-wrap">
+                <img class="hero-logo" src="assets/logo-magnatas-trim.png" alt="Servidor Magnatas">
+            </div>
+            <h1 class="hero-title">Magia, Tecnologia e Aventura</h1>
+            <div class="hero-underline"></div>
+            <p class="hero-kicker">Convide seus amigos para jogar!</p>
+            <div class="hero-actions">
+                <a class="btn btn--ouro" href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">
+                    <span class="sheen"></span>
+                    Baixar Modpack
+                </a>
+                <a class="btn btn--fantasma" href="#servidores">Ver Servidores</a>
             </div>
         </div>
-        <div class="hv2-scroll-cue"></div>
+        <div class="hero-cue"></div>
+        <div class="hero-edge"></div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div data-reveal class="hv2-section-heading">
-                <p class="hv2-eyebrow hv2-eyebrow-magenta">Por que o Magnatas</p>
+    <!-- Por que o Magnatas -->
+    <section class="why">
+        <div class="wrap">
+            <div class="why-head" data-reveal>
+                <p class="eyebrow eyebrow--magenta">Por que o Magnatas</p>
                 <h2 class="section-title">Por Que Escolher o Servidor Magnatas?</h2>
             </div>
-            <div class="features-grid">
-                <div data-reveal class="feature-card">
-                    <h3>Magia</h3>
+            <div class="why-grid">
+                <div class="why-card why-card--magenta" data-reveal>
+                    <div class="card-topline"></div>
+                    <h3 class="card-title texto-ouro">Magia</h3>
                     <p>Explore um mundo repleto de feitiços, encantamentos e mistérios arcanos</p>
                 </div>
-                <div data-reveal class="feature-card">
-                    <h3>Tecnologia</h3>
+                <div class="why-card why-card--ciano" data-reveal>
+                    <div class="card-topline"></div>
+                    <h3 class="card-title texto-ouro">Tecnologia</h3>
                     <p>Construa máquinas avançadas, automatize processos e domine a tecnologia</p>
                 </div>
-                <div data-reveal class="feature-card">
-                    <h3>Aventura</h3>
+                <div class="why-card why-card--lima" data-reveal>
+                    <div class="card-topline"></div>
+                    <h3 class="card-title texto-ouro">Aventura</h3>
                     <p>Embarque em missões épicas e descubra dimensões inexploradas</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="hv2-divider"></div>
+    <div class="neon-rule neon-rule--a"></div>
 
-    <!-- Servers Section -->
-    <section id="servidores" class="servers-showcase">
-        <div class="container">
-            <div data-reveal class="hv2-section-heading hv2-section-heading-split">
+    <!-- Servidores -->
+    <section id="servidores" class="servers">
+        <div class="wrap">
+            <div class="servers-head" data-reveal>
                 <div>
-                    <p class="hv2-eyebrow hv2-eyebrow-cyan">A rede</p>
+                    <p class="eyebrow eyebrow--ciano">A rede</p>
                     <h2 class="section-title">Nossos Servidores</h2>
                 </div>
+                <p class="servers-meta" id="net-label-2">Verificando a rede...</p>
             </div>
 
-            <!-- Magnatas Original -->
-            <div data-reveal class="showcase-server magnatas-original">
-                <div class="showcase-content">
-                    <div class="showcase-header">
-                        <span class="server-indicator loading" id="indicator-mgt">●</span>
-                        <img src="assets/logo-magnatas-trim.png" alt="Servidor Magnatas" class="hv2-showcase-logo">
-                        <h3>Servidor Magnatas</h3>
-                        <span class="server-badge fixo">Fixo</span>
+            <article class="server-card server-card--magenta" data-reveal>
+                <div class="card-edge"></div>
+                <div class="server-head">
+                    <span class="dot" id="mgt-dot">●</span>
+                    <img class="server-logo server-logo--mgt" src="assets/logo-magnatas-trim.png" alt="Servidor Magnatas">
+                    <h3 class="server-name">Servidor Magnatas</h3>
+                    <span class="tag tag--fixo">Fixo</span>
+                </div>
+                <p class="server-desc">O Servidor Magnatas é um modpack original feito por nós, com receitas e progressão personalizada para uma experiência mais desafiadora. O objetivo final é se tornar imortal.</p>
+                <div class="server-meta">
+                    <div class="meta-box meta-box--ip">
+                        <span class="meta-label">IP</span>
+                        <span class="meta-value">mgt.servidormagnatas.com.br</span>
+                        <button class="btn-copy" type="button" data-copy="mgt.servidormagnatas.com.br">Copiar</button>
                     </div>
-                    <p class="showcase-description">O Servidor Magnatas é um modpack original feito por nós, com receitas e progressão personalizada para uma experiência mais desafiadora. O objetivo final é se tornar imortal.</p>
-                    <div class="showcase-info">
-                        <div class="info-item">
-                            <span class="info-label">IP:</span>
-                            <span class="info-value">mgt.servidormagnatas.com.br</span>
-                            <button class="btn-copy-small" onclick="copyIP('mgt.servidormagnatas.com.br')">Copiar</button>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Status:</span>
-                            <span class="info-value" id="status-text-mgt">Verificando...</span>
-                        </div>
+                    <div class="meta-box meta-box--status">
+                        <span class="meta-label">Status</span>
+                        <span class="meta-value" id="mgt-status">Verificando...</span>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-- ATM10 -->
-            <div data-reveal class="showcase-server atm10">
-                <div class="showcase-content">
-                    <div class="showcase-header">
-                        <span class="server-indicator loading" id="indicator-allthemons">●</span>
-                        <img src="assets/logo-atm10.png" alt="All The Mods 10" class="hv2-showcase-logo">
-                        <h3>All The Mods - ATM10</h3>
-                        <span class="server-badge rotativo">Rotativo</span>
+            <article class="server-card server-card--lima" data-reveal>
+                <div class="card-edge"></div>
+                <div class="server-head">
+                    <span class="dot" id="atm-dot">●</span>
+                    <img class="server-logo server-logo--atm" src="assets/logo-atm10.png" alt="All The Mods 10">
+                    <h3 class="server-name">All The Mods - ATM10</h3>
+                    <span class="tag tag--rotativo">Rotativo</span>
+                </div>
+                <p class="server-desc">All The Mods - ATM10 traz a experiência clássica de mods, combinando progressão por quests e liberdade para explorar, com créditos ao FTB Team pelo desenvolvimento do modpack.</p>
+                <div class="server-meta">
+                    <div class="meta-box meta-box--ip">
+                        <span class="meta-label">IP</span>
+                        <span class="meta-value">rotativo.servidormagnatas.com.br</span>
+                        <button class="btn-copy" type="button" data-copy="rotativo.servidormagnatas.com.br">Copiar</button>
                     </div>
-                    <p class="showcase-description">All The Mods - ATM10 traz a experiência clássica de mods, combinando progressão por quests e liberdade para explorar, com créditos ao FTB Team pelo desenvolvimento do modpack.</p>
-                    <div class="showcase-info">
-                        <div class="info-item">
-                            <span class="info-label">IP:</span>
-                            <span class="info-value">rotativo.servidormagnatas.com.br</span>
-                            <button class="btn-copy-small" onclick="copyIP('rotativo.servidormagnatas.com.br')">Copiar</button>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Status:</span>
-                            <span class="info-value" id="status-text-allthemons">Verificando...</span>
-                        </div>
+                    <div class="meta-box meta-box--status">
+                        <span class="meta-label">Status</span>
+                        <span class="meta-value" id="atm-status">Verificando...</span>
                     </div>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
 
-    <div class="hv2-divider"></div>
+    <div class="neon-rule neon-rule--b"></div>
 
-    <!-- Stats Section -->
+    <!-- Numeros -->
     <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div data-reveal class="stat-item">
-                    <h3 class="stat-number">20-30</h3>
-                    <p class="stat-label">Média de Jogadores Simultâneos</p>
-                </div>
-                <div data-reveal class="stat-item">
-                    <h3 class="stat-number">24/7</h3>
-                    <p class="stat-label">Uptime</p>
-                </div>
-                <div data-reveal class="stat-item">
-                    <h3 class="stat-number">6000+</h3>
-                    <p class="stat-label">Membros no Discord</p>
-                </div>
-                <div data-reveal class="stat-item">
-                    <h3 class="stat-number">100%</h3>
-                    <p class="stat-label">Compromisso e Qualidade</p>
-                </div>
+        <div class="stats-grid">
+            <div class="stat-card" data-reveal>
+                <p class="stat-number">20-30</p>
+                <div class="stat-dash stat-dash--magenta"></div>
+                <p class="stat-label">Média de Jogadores Simultâneos</p>
+            </div>
+            <div class="stat-card" data-reveal>
+                <p class="stat-number">24/7</p>
+                <div class="stat-dash stat-dash--ciano"></div>
+                <p class="stat-label">Uptime</p>
+            </div>
+            <div class="stat-card" data-reveal>
+                <p class="stat-number">6000+</p>
+                <div class="stat-dash stat-dash--lima"></div>
+                <p class="stat-label">Membros no Discord</p>
+            </div>
+            <div class="stat-card" data-reveal>
+                <p class="stat-number">100%</p>
+                <div class="stat-dash stat-dash--magenta"></div>
+                <p class="stat-label">Compromisso e Qualidade</p>
             </div>
         </div>
     </section>
 
-    <div class="hv2-divider"></div>
+    <div class="neon-rule neon-rule--c"></div>
 
-    <!-- Voting Section -->
-    <section id="votar" class="voting-section">
-        <div class="container">
-            <div class="hv2-voting-grid">
-                <div data-reveal>
-                    <p class="hv2-eyebrow hv2-eyebrow-green">Apoie a rede</p>
-                    <h2 class="section-title hv2-voting-title">Vote no Servidor</h2>
-                    <div class="voting-content">
-                        <h3>Por que votar?</h3>
-                        <p>Ao votar no servidor, você nos ajuda a crescer e a alcançar mais jogadores. Quanto mais votos, maior a visibilidade do servidor nas listas!</p>
-                        <h3>Recompensas por Voto</h3>
-                        <div class="hv2-reward-list">
-                            <p><span class="hv2-plus hv2-plus-magenta">+</span>200 MGT Coins por voto</p>
-                            <p><span class="hv2-plus hv2-plus-cyan">+</span>Reconhecimento público no servidor</p>
-                            <p><span class="hv2-plus hv2-plus-green">+</span>Ajude o servidor a crescer</p>
-                        </div>
-                    </div>
-                </div>
-                <div data-reveal class="voting-sites">
-                    <h3>Sites de Votação</h3>
-                    <div class="vote-buttons">
-                        <a href="https://minecraft-mp.com/server/329158/vote/" class="vote-btn" target="_blank">
-                            <span class="vote-btn-text">Site de Voto #1</span>
-                            <span class="hv2-vote-arrow">Votar →</span>
-                        </a>
-                        <a href="https://minecraftservers.org/vote/680505" class="vote-btn" target="_blank">
-                            <span class="vote-btn-text">Site de Voto #2</span>
-                            <span class="hv2-vote-arrow">Votar →</span>
-                        </a>
-                        <a href="https://topg.org/minecraft-servers/server-677160" class="vote-btn" target="_blank">
-                            <span class="vote-btn-text">Site de Voto #3</span>
-                            <span class="hv2-vote-arrow">Votar →</span>
-                        </a>
-                        <a href="https://moddedminecraftservers.com/server/servidor-magnatas.60780/" class="vote-btn" target="_blank">
-                            <span class="vote-btn-text">Site de Voto #4</span>
-                            <span class="hv2-vote-arrow">Votar →</span>
-                        </a>
-                        <a href="https://atlauncher.com/servers/server/2844" class="vote-btn" target="_blank">
-                            <span class="vote-btn-text">Site de Voto #5</span>
-                            <span class="hv2-vote-arrow">Votar →</span>
-                        </a>
-                    </div>
+    <!-- Votacao -->
+    <section id="votar" class="vote">
+        <div class="vote-grid">
+            <div class="vote-copy" data-reveal>
+                <p class="eyebrow eyebrow--lima">Apoie a rede</p>
+                <h2 class="section-title">Vote no Servidor</h2>
+                <h3 class="vote-subtitle texto-ouro">Por que votar?</h3>
+                <p class="vote-text">Ao votar no servidor, você nos ajuda a crescer e a alcançar mais jogadores. Quanto mais votos, maior a visibilidade do servidor nas listas!</p>
+                <h3 class="vote-subtitle texto-ouro">Recompensas por Voto</h3>
+                <div class="rewards">
+                    <p class="reward"><span class="reward-mark reward-mark--magenta">+</span>200 MGT Coins por voto</p>
+                    <p class="reward"><span class="reward-mark reward-mark--ciano">+</span>Reconhecimento público no servidor</p>
+                    <p class="reward"><span class="reward-mark reward-mark--lima">+</span>Ajude o servidor a crescer</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
             <div data-reveal>
-                <p class="hv2-eyebrow hv2-eyebrow-cyan">Comunidade</p>
-                <h2 class="cta-title">Pronto Para Começar a Aventura?</h2>
-                <p class="cta-subtitle">Entre no nosso Discord para baixar o modpack e começar a jogar!</p>
-                <a href="https://discord.gg/VewgTM2rNu" class="btn btn-primary btn-large hv2-sheen" target="_blank">Entrar no Discord</a>
+                <h3 class="vote-list-title">Sites de Votação</h3>
+                <div class="vote-list-rule"></div>
+                <div class="vote-list">
+                    <a class="vote-link vote-link--ciano" href="https://minecraft-mp.com/server/329158/vote/" target="_blank" rel="noopener">
+                        <span class="vote-name">Site de Voto #1</span>
+                        <span class="vote-go">Votar →</span>
+                    </a>
+                    <a class="vote-link vote-link--magenta" href="https://minecraftservers.org/vote/680505" target="_blank" rel="noopener">
+                        <span class="vote-name">Site de Voto #2</span>
+                        <span class="vote-go">Votar →</span>
+                    </a>
+                    <a class="vote-link vote-link--lima" href="https://topg.org/minecraft-servers/server-677160" target="_blank" rel="noopener">
+                        <span class="vote-name">Site de Voto #3</span>
+                        <span class="vote-go">Votar →</span>
+                    </a>
+                    <a class="vote-link vote-link--ciano" href="https://moddedminecraftservers.com/server/servidor-magnatas.60780/" target="_blank" rel="noopener">
+                        <span class="vote-name">Site de Voto #4</span>
+                        <span class="vote-go">Votar →</span>
+                    </a>
+                    <a class="vote-link vote-link--magenta" href="https://atlauncher.com/servers/server/2844" target="_blank" rel="noopener">
+                        <span class="vote-name">Site de Voto #5</span>
+                        <span class="vote-go">Votar →</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Servidor <span>Magnatas</span></h3>
-                    <p>Magia, Tecnologia e Aventura</p>
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-glow"></div>
+        <div class="cta-edge cta-edge--topo"></div>
+        <div class="cta-inner" data-reveal>
+            <p class="eyebrow eyebrow--ciano">Comunidade</p>
+            <h2 class="cta-title">Pronto Para Começar a Aventura?</h2>
+            <p class="cta-text">Entre no nosso Discord para baixar o modpack e começar a jogar!</p>
+            <a class="btn btn--ouro btn--ouro-grande" href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">
+                <span class="sheen"></span>
+                Entrar no Discord
+            </a>
+        </div>
+        <div class="cta-edge cta-edge--base"></div>
+    </section>
+
+    <!-- Rodape -->
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <img class="footer-logo" src="assets/logo-magnatas-trim.png" alt="Magnatas">
+                        <span class="footer-brand-name">Servidor <span class="texto-ouro">Magnatas</span></span>
+                    </div>
+                    <p class="footer-tagline">Magia, Tecnologia e Aventura</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="#servidores">Servidores</a></li>
-                        <li><a href="#votar">Votar</a></li>
-                        <li><a href="equipe.html">Nossa Equipe</a></li>
-                    </ul>
+                <div class="footer-col--ciano">
+                    <h4 class="footer-title footer-title--ciano">Links Rápidos</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Início</a>
+                        <a href="#servidores">Servidores</a>
+                        <a href="#votar">Votar</a>
+                        <a href="equipe.html">Nossa Equipe</a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Externos</h4>
-                    <ul>
-                        <li><a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank">Wiki</a></li>
-                        <li><a href="https://loja.servidormagnatas.com.br/store" target="_blank">Loja</a></li>
-                    </ul>
+                <div class="footer-col--magenta">
+                    <h4 class="footer-title footer-title--magenta">Links Externos</h4>
+                    <div class="footer-links">
+                        <a href="https://servidormagnatas.notion.site/Servidor-Magnatas-Wiki-26857a7ad0ba80d8a498e7d2654ec6df" target="_blank" rel="noopener">Wiki</a>
+                        <a href="https://loja.servidormagnatas.com.br/store" target="_blank" rel="noopener">Loja</a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Redes Sociais</h4>
-                    <ul>
-                        <li><a href="https://discord.gg/VewgTM2rNu" target="_blank">Discord</a></li>
-                        <li><a href="https://www.tiktok.com/@servidormagnatas" target="_blank">TikTok</a></li>
-                        <li><a href="https://www.youtube.com/@GnomoMuitoLoco" target="_blank">YouTube</a></li>
-                        <li><a href="https://www.facebook.com/servidormagnatas/" target="_blank">Facebook</a></li>
-                        <li><a href="https://twitter.com/ServidrMagnatas" target="_blank">Twitter</a></li>
-                    </ul>
+                <div class="footer-col--lima">
+                    <h4 class="footer-title footer-title--lima">Redes Sociais</h4>
+                    <div class="footer-links">
+                        <a href="https://discord.gg/VewgTM2rNu" target="_blank" rel="noopener">Discord</a>
+                        <a href="https://www.tiktok.com/@servidormagnatas" target="_blank" rel="noopener">TikTok</a>
+                        <a href="https://www.youtube.com/@GnomoMuitoLoco" target="_blank" rel="noopener">YouTube</a>
+                        <a href="https://www.facebook.com/servidormagnatas/" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://twitter.com/ServidrMagnatas" target="_blank" rel="noopener">Twitter</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Servidor Magnatas. Todos os direitos reservados.</p>
-            </div>
+            <div class="footer-rule"></div>
+            <p class="footer-legal">&copy; 2026 Servidor Magnatas. Todos os direitos reservados.</p>
         </div>
     </footer>
+</div>
 
-    <script src="script.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
